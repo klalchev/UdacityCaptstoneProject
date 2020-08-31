@@ -1,18 +1,15 @@
-/* Global Variables */
-let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip='; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
-let apiKey = '2f9d80ab8c52e4d2a367f61f56dcf2a4';
+function performAction(event){
+    event.preventdefault()
 
+    // Create a new date instance dynamically with JS
+    let d = new Date();
+    let newDate = (d.getMonth() + 1) + '.'+ d.getDate()+'.'+ d.getFullYear(); //0= january, so adding 1 to show the correct month
+    console.log(newDate);
 
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = (d.getMonth() + 1) + '.'+ d.getDate()+'.'+ d.getFullYear(); //0= january, so adding 1 to show the correct month
+    // Declare apiKey
+    let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip='; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
+    let apiKey = '2f9d80ab8c52e4d2a367f61f56dcf2a4';
 
-console.log(newDate);
-
-// Add Event Listener to button
-document.getElementById('generate').addEventListener('click', performAction);
-
-function performAction(e){
     // Select the actual value of an HTML input to include in POST
     const newWeather = document.getElementById('zip').value;
     const fav = document.getElementById('feelings').value;
@@ -87,3 +84,5 @@ const updateUI = async () => {
         console.log("error", error)
     }
 }
+
+export {performAction}
