@@ -1,29 +1,34 @@
 // Setup empty JS object to act as endpoint for all routes
 projectData = {}; // can not be cost because it is being reassigned each time we fetch a new zip code object
 
-// Require Express to run server and routes
-const express = require('express');
-
-// Start up an instance of app
-const app = express();
-
-/* Dependencies*/
+var path = require('path')
+const express = require('express')
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
-/* Middleware*/
-
-//Here we are configuring express to use body-parser as middle-ware.
+const app = express()
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('dist'))
 
-// Cors for cross origin allowance
-const cors = require('cors');
-app.use(cors());
+console.log(__dirname)
 
 // Initialize the main project folder
-app.use(express.static('dist'));
+app.get('/', function (req, res) {
+    res.sendFile('dist/index.html')
+    // res.sendFile('client/views/index.html', {root: __dirname + '/..'})
+    // res.sendFile(path.resolve('src/client/views/index.html'))
+})
+
+// designates what port the app will listen to for incoming requests
+app.listen(4040, function () {
+    console.log('Example app listening on port 4040!')
+})
 
 // Setup Server
+
+/*
 const port = 3000;
 
 const server = app.listen(port, listening); // listen method- when the server has been activated, log the `running on localhost: ${port}`message
@@ -32,6 +37,7 @@ function listening(){
     console.log(`running on localhost: ${port}`);
     console.log('hello');
 };
+*/
 
 //GET Route
 
