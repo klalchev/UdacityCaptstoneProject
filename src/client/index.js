@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('generate').addEventListener('click', performAction);
 });
 
+import './styles/style.scss'
+
 export {
     performAction
 }
