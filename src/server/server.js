@@ -50,15 +50,15 @@ function getData(req, res){
 
 // POST Route
 
-app.post('/addWeather', addWeather); //post data from app.js to server.js
+app.post('/addCity', addCity); //post data from app.js to server.js
 
-function addWeather(req, res){ //each route (post or get) callback function has a request (in this case req) and respond (res) parameters. Request requests/accesses data from the app. Respond sends data to the app
+function addCity(req, res){ //each route (post or get) callback function has a request (in this case req) and respond (res) parameters. Request requests/accesses data from the app. Respond sends data to the app
 
     newEntry = {
-        city: req.body.city, //In the app file we attached our data to the body of our POST request, so to receive that data and make it actionable we can use req.body
-        date: req.body.date,
-        temp: req.body.temp,
-        description: req.body.description, // when you add a new element to the server, you have to rerun the server to show the new element
+        lat: req.body.lat, //In the app file we attached our data to the body of our POST request, so to receive that data and make it actionable we can use req.body
+        lng: req.body.lng,
+        country: req.body.country,
+      // when you add a new element to the server, you have to rerun the server to show the new element
         fav: req.body.fav
     }
 

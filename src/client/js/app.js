@@ -1,5 +1,5 @@
-function performAction(event){
-    event.preventdefault()
+function performAction(e){
+    // event.preventdefault()
 
     // Create a new date instance dynamically with JS
     let d = new Date();
@@ -7,18 +7,18 @@ function performAction(event){
     console.log(newDate);
 
     // Declare apiKey
-    let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip='; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
-    let apiKey = '2f9d80ab8c52e4d2a367f61f56dcf2a4';
+    let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
+    let userName = 'lalchev88';
 
     // Select the actual value of an HTML input to include in POST
-    const newWeather = document.getElementById('zip').value;
+    const newCity = document.getElementById('city').value;
     const fav = document.getElementById('feelings').value;
 
-    getWeatherDemo(baseURL, newWeather, apiKey)
+    getWeatherDemo(url)
     .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
 
         console.log(data);
-        postData('/addWeather', {city: data.name, date: newDate, temp: data.main, description: data.weather[0].description, fav: fav} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
+        postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, fav: fav} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
 
     // We can do this because of Async!
     updateUI()
@@ -48,9 +48,9 @@ const postData = async ( url = '', data = {})=>{
     }
 }
 
-const getWeatherDemo = async (baseURL, weather, key)=>{
+const getWeatherDemo = async (baseURL)=>{
     //1.
-    const res = await fetch(baseURL+weather+',us'+'&units=metric'+'&appid='+key) //using units=metric to convert from kelvin to celcius: For temperature in Fahrenheit use units=imperial, For temperature in Celsius use units=metric
+    const res = await fetch(baseURL)
     //2. Call Fake API
     //const res = await fetch('/fakePictureData')
     try {
@@ -75,10 +75,10 @@ const updateUI = async () => {
         const allData = await request.json();
         console.log(allData);
 
-        document.getElementById('date').innerHTML ='Date: ' + allData.date;
-        document.getElementById('city').innerHTML ='City: ' + allData.city;
-        document.getElementById('temp').innerHTML = 'Temp: ' + (allData.temp.temp).toFixed(1) + ' \xB0' + 'C';
-        document.getElementById('description').innerHTML ='Forecast: ' + allData.description;
+        document.getElementById('lat').innerHTML ='Latitude: ' + allData.lat;
+       // document.getElementById('city').innerHTML ='City: ' + allData.city;
+        document.getElementById('lng').innerHTML = 'Longtitude: ' + allData.lng;
+        document.getElementById('country').innerHTML ='Country: ' + allData.country;
         document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
     }catch(error){
         console.log("error", error)
