@@ -7,12 +7,13 @@ function performAction(e){
     console.log(newDate);
 
     // Declare apiKey
-    let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
     let userName = 'lalchev88';
 
     // Select the actual value of an HTML input to include in POST
     const newCity = document.getElementById('city').value;
     const fav = document.getElementById('feelings').value;
+
+    let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
 
     getWeatherDemo(url)
     .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
