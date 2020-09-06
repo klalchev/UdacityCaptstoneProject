@@ -1,12 +1,17 @@
 import {performAction} from './js/app'
+import {countClock} from './js/countdown'
 
 document.addEventListener('DOMContentLoaded', (event) => {
     // install listeners here
-    document.getElementById('generate').addEventListener('click', performAction);
+    document.getElementById('generate').addEventListener('click', () => {
+        performAction();
+        countClock();
+});
 });
 
 import './styles/style.scss'
 
 export {
-    performAction
+    performAction,
+    countClock
 }

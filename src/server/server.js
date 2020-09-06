@@ -59,7 +59,7 @@ function addCity(req, res){ //each route (post or get) callback function has a r
         lng: req.body.lng,
         country: req.body.country,
       // when you add a new element to the server, you have to rerun the server to show the new element
-        fav: req.body.fav,
+      // fav: req.body.fav,
         date: req.body.date,
         trip: req.body.trip
     }

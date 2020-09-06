@@ -11,7 +11,7 @@ function performAction(e){
 
     // Select the actual value of an HTML input to include in POST
     const newCity = document.getElementById('city').value;
-    const fav = document.getElementById('feelings').value;
+    // const fav = document.getElementById('feelings').value;
 
     let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
 
@@ -19,7 +19,7 @@ function performAction(e){
     .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
 
         console.log(data);
-        postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, fav: fav, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
+        postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
 
     // We can do this because of Async!
     updateUI()
@@ -76,12 +76,12 @@ const updateUI = async () => {
         const allData = await request.json();
         console.log(allData);
 
-        document.getElementById('date').innerHTML ='Date: ' + allData.date;
+        document.getElementById('date').innerHTML ='Departing: ' + allData.date;
         document.getElementById('lat').innerHTML ='Latitude: ' + allData.lat;
-        document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ',' +allData.country;
+        document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
         document.getElementById('lng').innerHTML = 'Longtitude: ' + allData.lng;
         document.getElementById('country').innerHTML ='Country: ' + allData.country;
-        document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
+        //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
     }catch(error){
         console.log("error", error)
     }
