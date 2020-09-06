@@ -19,7 +19,7 @@ function performAction(e){
     .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
 
         console.log(data);
-        postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, fav: fav} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
+        postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, fav: fav, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
 
     // We can do this because of Async!
     updateUI()
@@ -76,8 +76,9 @@ const updateUI = async () => {
         const allData = await request.json();
         console.log(allData);
 
+        document.getElementById('date').innerHTML ='Date: ' + allData.date;
         document.getElementById('lat').innerHTML ='Latitude: ' + allData.lat;
-       // document.getElementById('city').innerHTML ='City: ' + allData.city;
+        document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ',' +allData.country;
         document.getElementById('lng').innerHTML = 'Longtitude: ' + allData.lng;
         document.getElementById('country').innerHTML ='Country: ' + allData.country;
         document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;

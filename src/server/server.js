@@ -59,7 +59,9 @@ function addCity(req, res){ //each route (post or get) callback function has a r
         lng: req.body.lng,
         country: req.body.country,
       // when you add a new element to the server, you have to rerun the server to show the new element
-        fav: req.body.fav
+        fav: req.body.fav,
+        date: req.body.date,
+        trip: req.body.trip
     }
 
 projectData = newEntry; // projectData can not be of type const, because we are updating it each time a new zip is fetched. projectDate will be reassigned the value of newEntry each time and hence it will only store the last entry, whereas an array with a push method would store alll entries. Since the object stores the last entry, it is light weight- does not occupy memory!
