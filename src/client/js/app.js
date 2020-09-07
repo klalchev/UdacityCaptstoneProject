@@ -16,7 +16,7 @@ function performAction(e){
 
     let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
 
-    /*
+
     getWeatherDemo(url)
     .then(async function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
 
@@ -29,12 +29,15 @@ function performAction(e){
 
             updateUI()
         })
-    */
+
+
+    /*
    const geonamesData =await getWeatherDemo(url);
    const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: newDate, trip: newCity});
    const myData = await updateWeather(res);
    await postData('/addWeatherBit', {temp: myData.data[0].temp, description: myData.data[0].weather.description});
    updateUI();
+   */
 }
 
 /* POST Example */
@@ -82,6 +85,7 @@ const getWeatherDemo = async (baseURL)=>{
 
 const updateWeather = async (weatherData)=>{
     //1.
+    const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
     const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${weatherData.lat}&lon=${weatherData.lng}&key=${weatherBitKey}`)
     //2. Call Fake API
     //const res = await fetch('/fakePictureData')
