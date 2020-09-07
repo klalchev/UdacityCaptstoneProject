@@ -8,6 +8,7 @@ function performAction(e){
 
     // Declare apiKey
     let userName = 'lalchev88';
+    const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
 
     // Select the actual value of an HTML input to include in POST
     const newCity = document.getElementById('city').value;
@@ -15,19 +16,26 @@ function performAction(e){
 
     let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
 
+    /*
     getWeatherDemo(url)
-    .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
+    .then(async function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
 
     console.log(data);
-    postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
+    await postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
     })
-        .then(res=>{updateWeather(res)})
+        .then(res=>updateWeather(res))
             .then(function(myData){
             postData('/addWeatherBit', {temp: myData.data[0].temp, description: myData.data[0].weather.description})
 
             updateUI()
         })
-
+    */
+   const geonamesData =await getWeatherDemo(url);
+   const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: newDate, trip: newCity});
+   const myData = await updateWeather(res);
+   await postData('/addWeatherBit', {temp: myData.data[0].temp, description: myData.data[0].weather.description});
+   updateUI();
+}
 
 /* POST Example */
 const postData = async ( url = '', data = {})=>{
@@ -72,10 +80,9 @@ const getWeatherDemo = async (baseURL)=>{
 }
 
 
-const updateWeather = async (myBaseURL)=>{
+const updateWeather = async (weatherData)=>{
     //1.
-    weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
-    const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${projectData.lat}&lon=${projectData.lng}&key=${weatherBitKey}`)
+    const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${weatherData.lat}&lon=${weatherData.lng}&key=${weatherBitKey}`)
     //2. Call Fake API
     //const res = await fetch('/fakePictureData')
     try {
@@ -110,7 +117,6 @@ const updateUI = async () => {
     }catch(error){
         console.log("error", error)
     }
-}
 }
 
 export {performAction}

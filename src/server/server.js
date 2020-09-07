@@ -41,24 +41,23 @@ function listening(){
 */
 
 //GET Route
-
+/*
 app.get('/all', getData) //In this case get sends the data to the app.js. Every GET request produces a request, which is the data provided by the GET request, and a response, which is the data returned to the GET request
 
 function getData(req, res){
     res.send(projectData)
     console.log(projectData)
 }
+*/
 
 app.get('/addWeatherBit', getWeatherData)
 
 function getWeatherData(req, res){
-    myNewEntry = {
-       temp: req.body.temp,
-       description: req.body.description
-   }
+   projectData.temp= req.body.temp; // How to add the myNewEntry to the projectdata
+   projectData.description= req.body.description;
 
-   projectData.myNewEntry.temp= req.body.temp; // How to add the myNewEntry to the projectdata
-   projectData.myNewEntry.description= req.body.description;
+   res.send(projectData) //send projectData to the server
+   console.log(projectData)
 }
 
 // POST Route
