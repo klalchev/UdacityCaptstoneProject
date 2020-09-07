@@ -18,14 +18,16 @@ function performAction(e){
     getWeatherDemo(url)
     .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
 
-        console.log(data);
-        postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
+    console.log(data);
+    postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
+    })
+        .then(res=>{updateWeather(res)})
+            .then(function(myData){
+            postData('/addWeatherBit', {temp: myData.data[0].temp, description: myData.data[0].weather.description})
 
-    // We can do this because of Async!
-    updateUI()
-})
+            updateUI()
+        })
 
-}
 
 /* POST Example */
 const postData = async ( url = '', data = {})=>{
@@ -69,22 +71,46 @@ const getWeatherDemo = async (baseURL)=>{
     }
 }
 
+
+const updateWeather = async (myBaseURL)=>{
+    //1.
+    weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
+    const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${projectData.lat}&lon=${projectData.lng}&key=${weatherBitKey}`)
+    //2. Call Fake API
+    //const res = await fetch('/fakePictureData')
+    try {
+
+        const data = await res.json(); // res.json() is the data you fetch
+        console.log(data)
+        return data;
+        // 1. We can do sth with our returned data here-- like chain promises
+
+        // 2.
+        // postData('/addAnimal', data)
+    }   catch(error) {
+        // appropriately handle the error
+        console.log("error", error);
+    }
+}
+
+
 /* Update UI Demo */
 const updateUI = async () => {
-    const request = await fetch('/all')
+    const request = await fetch('/addWeatherBit')
     try{
         const allData = await request.json();
         console.log(allData);
 
         document.getElementById('date').innerHTML ='Departing: ' + allData.date;
-        document.getElementById('lat').innerHTML ='Latitude: ' + allData.lat;
+        document.getElementById('temp').innerHTML ='Temperature: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
-        document.getElementById('lng').innerHTML = 'Longtitude: ' + allData.lng;
+        document.getElementById('desc').innerHTML = 'Forecast: ' + allData.description;
         document.getElementById('country').innerHTML ='Country: ' + allData.country;
         //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
     }catch(error){
         console.log("error", error)
     }
+}
 }
 
 export {performAction}

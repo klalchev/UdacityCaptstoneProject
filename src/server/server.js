@@ -1,6 +1,7 @@
 // Setup empty JS object to act as endpoint for all routes
 projectData = {}; // can not be cost because it is being reassigned each time we fetch a new zip code object
 
+
 var path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser');
@@ -46,6 +47,18 @@ app.get('/all', getData) //In this case get sends the data to the app.js. Every 
 function getData(req, res){
     res.send(projectData)
     console.log(projectData)
+}
+
+app.get('/addWeatherBit', getWeatherData)
+
+function getWeatherData(req, res){
+    myNewEntry = {
+       temp: req.body.temp,
+       description: req.body.description
+   }
+
+   projectData.myNewEntry.temp= req.body.temp; // How to add the myNewEntry to the projectdata
+   projectData.myNewEntry.description= req.body.description;
 }
 
 // POST Route
