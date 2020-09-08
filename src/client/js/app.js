@@ -1,4 +1,4 @@
-function performAction(e){
+async function performAction(e){
     // event.preventdefault()
 
     // Create a new date instance dynamically with JS
@@ -16,12 +16,12 @@ function performAction(e){
 
     let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
 
-
+    /*
     getWeatherDemo(url)
-    .then(async function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
+    .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
 
     console.log(data);
-    await postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
+    postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
     })
         .then(res=>updateWeather(res))
             .then(function(myData){
@@ -29,21 +29,22 @@ function performAction(e){
 
             updateUI()
         })
+*/
 
-
-    /*
    const geonamesData =await getWeatherDemo(url);
    const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: newDate, trip: newCity});
    const myData = await updateWeather(res);
-   await postData('/addWeatherBit', {temp: myData.data[0].temp, description: myData.data[0].weather.description});
+   const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather});
+   console.log(myData);
+   console.log(weatherBitInfo);
+
    updateUI();
-   */
 }
 
 /* POST Example */
 const postData = async ( url = '', data = {})=>{
     //console.log(data);
-    const response = await fetch(url, { // url indicates where we want to post the data to;
+    const response = await fetch(url, {
     method: 'POST', //*GET, POST, PUT, DELETE - we could get data, post data, put or delete data
     credentials: 'same-origin', //include, *same-origin, omit
     headers: {
