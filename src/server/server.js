@@ -87,3 +87,7 @@ function getData(req, res){
     res.send(projectData)
     console.log(projectData)
 }
+
+/*
+app.get('/all', (_, s) => s.send(projectData)); //short way to right the same get route
+*/
