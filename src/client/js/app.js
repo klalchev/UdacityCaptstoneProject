@@ -108,7 +108,7 @@ const updateWeather = async (weatherData)=>{
 
 /* Update UI Demo */
 const updateUI = async () => {
-    const request = await fetch('/addWeatherBit')
+    const request = await fetch('/all')
     try{
         const allData = await request.json();
         console.log(allData);
