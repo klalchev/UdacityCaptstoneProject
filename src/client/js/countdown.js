@@ -33,3 +33,4 @@ const countDownDate = new Date(countDown).getTime();
 }
 
 export {countClock}
+export default distance;

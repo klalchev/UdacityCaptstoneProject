@@ -33,10 +33,28 @@ async function performAction(e){
 
    const geonamesData =await getWeatherDemo(url);
    const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: newDate, trip: newCity});
-   const myData = await updateWeather(res);
-   const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
-   console.log(myData);
-   console.log(weatherBitInfo);
+
+   if (Client.distance> 604800000) {
+       const myData = await updateWeather(res);
+       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
+
+       console.log(myData);
+       console.log(weatherBitInfo);
+   }
+   else {
+       const myDailyForecast = await dailyForecast(res);
+       const weatherBitDaily = await postData('/addWeatherBit', {temp: myDailyForecast.data[0].high_temp, description: myDailyForecast.data[0].weather.description});
+
+       console.log(myDailyForecast);
+       console.log(weatherBitDaily);
+   }
+
+   // const myData = await updateWeather(res);
+
+   // const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
+
+   // console.log(myData);
+   // console.log(weatherBitInfo);
 
    updateUI();
 }
@@ -88,6 +106,28 @@ const updateWeather = async (weatherData)=>{
     //1.
     const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
     const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${weatherData.lat}&lon=${weatherData.lng}&key=${weatherBitKey}`)
+    //2. Call Fake API
+    //const res = await fetch('/fakePictureData')
+    try {
+
+        const data = await res.json(); // res.json() is the data you fetch
+        console.log(data)
+        return data;
+        // 1. We can do sth with our returned data here-- like chain promises
+
+        // 2.
+        // postData('/addAnimal', data)
+    }   catch(error) {
+        // appropriately handle the error
+        console.log("error", error);
+    }
+}
+
+
+const dailyForecast = async (dailyForecastData)=>{
+    //1.
+    const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
+    const res = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${dailyForecastData.lat}&lon=${dailyForecastData.lng}&key=${weatherBitKey}`)
     //2. Call Fake API
     //const res = await fetch('/fakePictureData')
     try {

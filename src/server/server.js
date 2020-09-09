@@ -1,7 +1,6 @@
 // Setup empty JS object to act as endpoint for all routes
 projectData = {}; // can not be cost because it is being reassigned each time we fetch a new zip code object
 
-
 var path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser');
