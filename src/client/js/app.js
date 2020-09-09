@@ -34,7 +34,7 @@ async function performAction(e){
    const geonamesData =await getWeatherDemo(url);
    const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: newDate, trip: newCity});
    const myData = await updateWeather(res);
-   const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather});
+   const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
    console.log(myData);
    console.log(weatherBitInfo);
 

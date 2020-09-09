@@ -21,7 +21,7 @@ const countDownDate = new Date(countDown).getTime();
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="demo"
-  document.getElementById("departureDay").innerHTML = days + "d " + hours + "h "
+  document.getElementById("departureDay").innerHTML ='Remaining time to trip: '+ days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
 
   // If the count down is finished, write some text
