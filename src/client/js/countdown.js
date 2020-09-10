@@ -1,4 +1,6 @@
 // Update the count down every 1 second
+var distance =0;
+
 function countClock (event) {
 //event.preventDefault()
 var x = setInterval(function() {
@@ -12,7 +14,7 @@ const countDownDate = new Date(countDown).getTime();
   var now = new Date().getTime();
 
   // Find the distance between now and the count down date
-  var distance = countDownDate - now;
+  distance = countDownDate - now;
 
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));

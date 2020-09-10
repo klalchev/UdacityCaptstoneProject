@@ -12,7 +12,7 @@ async function performAction(e){
 
     // Select the actual value of an HTML input to include in POST
     const newCity = document.getElementById('city').value;
-    // const fav = document.getElementById('feelings').value;
+    const date = document.getElementById('departure').value;
 
     let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
 
@@ -32,18 +32,18 @@ async function performAction(e){
 */
 
    const geonamesData =await getWeatherDemo(url);
-   const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: newDate, trip: newCity});
+   const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: date, trip: newCity});
 
    if (Client.distance> 604800000) {
        const myData = await updateWeather(res);
-       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
+       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[6].high_temp, description: myData.data[6].weather.description});
 
        console.log(myData);
        console.log(weatherBitInfo);
    }
    else {
        const myDailyForecast = await dailyForecast(res);
-       const weatherBitDaily = await postData('/addWeatherBit', {temp: myDailyForecast.data[0].high_temp, description: myDailyForecast.data[0].weather.description});
+       const weatherBitDaily = await postData('/addWeatherBit', {temp: myDailyForecast.data[0].temp, description: myDailyForecast.data[0].weather.description});
 
        console.log(myDailyForecast);
        console.log(weatherBitDaily);
@@ -105,7 +105,7 @@ const getWeatherDemo = async (baseURL)=>{
 const updateWeather = async (weatherData)=>{
     //1.
     const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
-    const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${weatherData.lat}&lon=${weatherData.lng}&key=${weatherBitKey}`)
+    const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${weatherData.lat}&lon=${weatherData.lng}&key=${weatherBitKey}`) //forecastAPI
     //2. Call Fake API
     //const res = await fetch('/fakePictureData')
     try {
@@ -127,7 +127,7 @@ const updateWeather = async (weatherData)=>{
 const dailyForecast = async (dailyForecastData)=>{
     //1.
     const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
-    const res = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${dailyForecastData.lat}&lon=${dailyForecastData.lng}&key=${weatherBitKey}`)
+    const res = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${dailyForecastData.lat}&lon=${dailyForecastData.lng}&key=${weatherBitKey}`) //dailyAPI
     //2. Call Fake API
     //const res = await fetch('/fakePictureData')
     try {
