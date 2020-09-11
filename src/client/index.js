@@ -1,6 +1,6 @@
 import {performAction} from './js/app'
 import {countClock} from './js/countdown'
-import distance from './js/countdown'
+import {distance} from './js/countdown'
 
 document.addEventListener('DOMContentLoaded', (event) => {
     // install listeners here

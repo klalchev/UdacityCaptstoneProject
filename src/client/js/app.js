@@ -1,6 +1,8 @@
 async function performAction(e){
     // event.preventdefault()
 
+
+
     // Create a new date instance dynamically with JS
     let d = new Date();
     let newDate = (d.getMonth() + 1) + '.'+ d.getDate()+'.'+ d.getFullYear(); //0= january, so adding 1 to show the correct month
@@ -36,8 +38,9 @@ async function performAction(e){
 
    if (Client.distance> 604800000) {
        const myData = await updateWeather(res);
-       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[6].high_temp, description: myData.data[6].weather.description});
+       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
 
+       console.log(Client.distance);
        console.log(myData);
        console.log(weatherBitInfo);
    }
@@ -45,6 +48,7 @@ async function performAction(e){
        const myDailyForecast = await dailyForecast(res);
        const weatherBitDaily = await postData('/addWeatherBit', {temp: myDailyForecast.data[0].temp, description: myDailyForecast.data[0].weather.description});
 
+       console.log(Client.distance);
        console.log(myDailyForecast);
        console.log(weatherBitDaily);
    }
