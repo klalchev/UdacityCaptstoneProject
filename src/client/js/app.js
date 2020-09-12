@@ -11,12 +11,16 @@ async function performAction(e){
     // Declare apiKey
     let userName = 'lalchev88';
     const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
+    let pixabayKey = '18282634-3d2c7001ec6e069609dd56f71';
 
     // Select the actual value of an HTML input to include in POST
     const newCity = document.getElementById('city').value;
     const date = document.getElementById('departure').value;
 
     let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
+
+    const uriPixabay = `https://pixabay.com/api/?key=${pixabayKey}&q=${newCity}&image_type=photo`;
+    const uriPixabayEncode = encodeURIComponent(uriPixabay);
 
     /*
     getWeatherDemo(url)
@@ -59,6 +63,12 @@ async function performAction(e){
 
    // console.log(myData);
    // console.log(weatherBitInfo);
+
+   const pixabayData= await pixabay (uriPixabayEncode);
+   const myPixabayData = await postData('/addWeatherBit', {image: pixabayData.hits[0].previewURL});
+
+   console.log(pixabayData);
+   console.log(myPixabayData);
 
    updateUI();
 }
@@ -149,6 +159,26 @@ const dailyForecast = async (dailyForecastData)=>{
     }
 }
 
+const pixabay = async (pixabayURL)=>{
+    //1.
+    const res = await fetch(pixabayURL)
+    //2. Call Fake API
+    //const res = await fetch('/fakePictureData')
+    try {
+
+        const data = await res.json(); // res.json() is the data you fetch
+        console.log(data)
+        return data;
+        // 1. We can do sth with our returned data here-- like chain promises
+
+        // 2.
+        // postData('/addAnimal', data)
+    }   catch(error) {
+        // appropriately handle the error
+        console.log("error", error);
+    }
+}
+
 
 /* Update UI Demo */
 const updateUI = async () => {
@@ -163,6 +193,7 @@ const updateUI = async () => {
         document.getElementById('desc').innerHTML = 'Forecast: ' + allData.description;
         document.getElementById('country').innerHTML ='Country: ' + allData.country;
         //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
+        document.getElementById('image').innerHTML = 'Destination Image ' + allData.image;
     }catch(error){
         console.log("error", error)
     }

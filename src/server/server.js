@@ -52,7 +52,7 @@ function getData(req, res){
 app.post('/addWeatherBit', getWeatherData)
 
 function getWeatherData(req, res){
-   projectData.temp= req.body.temp; // How to add the myNewEntry to the projectdata
+   projectData.temp= req.body.temp; // How to add a new key to the projectdata object
    projectData.description= req.body.description;
 
    res.send(projectData) //send projectData to the server
@@ -78,6 +78,14 @@ function addCity(req, res){ //each route (post or get) callback function has a r
 projectData = newEntry; // projectData can not be of type const, because we are updating it each time a new zip is fetched. projectDate will be reassigned the value of newEntry each time and hence it will only store the last entry, whereas an array with a push method would store alll entries. Since the object stores the last entry, it is light weight- does not occupy memory!
 res.send(projectData) //send projectData to the server
 console.log(projectData)
+}
+
+app.post('/addPixabayData', getPixabayData);
+
+function getPixabayData (req, res){
+    projectData.image = req.body.image;
+    res.send(projectData) //send projectData to the server
+    console.log(projectData)
 }
 
 app.get('/all', getData) //In this case get sends the data to the app.js. Every GET request produces a request, which is the data provided by the GET request, and a response, which is the data returned to the GET request
