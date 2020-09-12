@@ -35,4 +35,4 @@ const countDownDate = new Date(countDown).getTime();
 }
 
 export {countClock}
-export  {distance};
+export  {distance}
