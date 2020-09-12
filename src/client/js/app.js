@@ -19,8 +19,9 @@ async function performAction(e){
 
     let url = `http://api.geonames.org/searchJSON?q=${newCity}&maxRows=1&username=${userName}`; // could also be declared this way: `https://api.openweathermap.org/data/2.5/weather?zip=${newWeather},${countryCode}&appid=${apiKey}` countryCode will need to be declared as a variable in the performAction function
 
-    const uriPixabay = `https://pixabay.com/api/?key=${pixabayKey}&q=${newCity}&image_type=photo`;
-    const uriPixabayEncode = encodeURIComponent(uriPixabay);
+    const newCityEncode = encodeURI(newCity);
+    const uriPixabay = `https://pixabay.com/api/?key=${pixabayKey}&q=${newCityEncode}&category=travel&image_type=photo`;
+    // const uriPixabayEncode = encodeURIComponent(uriPixabay);
 
     /*
     getWeatherDemo(url)
@@ -64,8 +65,8 @@ async function performAction(e){
    // console.log(myData);
    // console.log(weatherBitInfo);
 
-   const pixabayData= await pixabay (uriPixabayEncode);
-   const myPixabayData = await postData('/addWeatherBit', {image: pixabayData.hits[0].previewURL});
+   const pixabayData= await pixabay (uriPixabay);
+   const myPixabayData = await postData('/addPixabayData', {image: pixabayData.hits[0].webformatURL});
 
    console.log(pixabayData);
    console.log(myPixabayData);
@@ -193,7 +194,7 @@ const updateUI = async () => {
         document.getElementById('desc').innerHTML = 'Forecast: ' + allData.description;
         document.getElementById('country').innerHTML ='Country: ' + allData.country;
         //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
-        document.getElementById('image').innerHTML = 'Destination Image ' + allData.image;
+        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`;
     }catch(error){
         console.log("error", error)
     }
