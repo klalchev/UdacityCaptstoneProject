@@ -1,7 +1,7 @@
+// import { func } from "./countdown";
+
 async function performAction(e){
     // event.preventdefault()
-
-
 
     // Create a new date instance dynamically with JS
     let d = new Date();
@@ -41,6 +41,8 @@ async function performAction(e){
    const geonamesData =await getWeatherDemo(url);
    const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: date, trip: newCity});
 
+   Client.func(); // exporting a function to index.js and accessing it using client library has the potential to break jest tests. Jest does not use webpack and has no idea of what Client is. It is hence generally a better proposal to import the function directly into your top level JS and use it there. So we would use sth like this in countdown.js export const func = ... and in app.js import {func} from "countdown.js"
+                  // Also, you want to do a func call before performAction reaches the if conditional on Client.distance to avoid another potential race condition. Note that I forced a func call right before comparison kicks in. That way, you are sure that the thing actually got a calculation once before other JS kicked in
    if (Client.distance> 604800000) {
        const myData = await updateWeather(res);
        const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
@@ -194,7 +196,7 @@ const updateUI = async () => {
         document.getElementById('desc').innerHTML = 'Forecast: ' + allData.description;
         document.getElementById('country').innerHTML ='Country: ' + allData.country;
         //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
-        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`;
+        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
     }catch(error){
         console.log("error", error)
     }

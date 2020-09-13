@@ -17,7 +17,8 @@
   </div>
   <div class ="holder feel">
     <label for="departure">Enter Departure date: MM/DD/YYYY</label>
-    <textarea class= "myInput" id="departure" placeholder="Enter your departure date here" rows="9" cols="50"></textarea>
+    <!--<textarea class= "myInput" id="departure" placeholder="Enter your departure date here" rows="9" cols="50"></textarea>-->
+    <input type="date" class="myInput" id="departure" placeholder="Enter your departure date here" max="2021-12-31" rows="9" cols="50"> <!--Consider using input type=date for your date input in the HTML form. You will thank yourself as a developer -- it makes adding dates way easier-->
     <button id="generate" type = "submit"> Generate </button>
   </div>
   <div class ="holder entry">
