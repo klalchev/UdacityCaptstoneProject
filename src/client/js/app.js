@@ -67,6 +67,9 @@ async function performAction(e){
    // console.log(myData);
    // console.log(weatherBitInfo);
 
+   const countryData = await restCountries (res);
+   const myCountryData = await postData ('/addCountryData', {currency: countryData[0].currencies[0].name, region: countryData[0].subregion, language: countryData[0].languages[0].name});
+
    const pixabayData= await pixabay (uriPixabay);
    const myPixabayData = await postData('/addPixabayData', {image: pixabayData.hits[0].webformatURL});
 
@@ -179,9 +182,29 @@ const pixabay = async (pixabayURL)=>{
     }   catch(error) {
         // appropriately handle the error
         console.log("error", error);
+        alert('destination not found');
     }
 }
 
+const restCountries = async (countriesData)=>{
+    //1.
+    const res = await fetch(`https://restcountries.eu/rest/v2/name/${countriesData.country}`) //dailyAPI
+    //2. Call Fake API
+    //const res = await fetch('/fakePictureData')
+    try {
+
+        const data = await res.json(); // res.json() is the data you fetch
+        console.log(data)
+        return data;
+        // 1. We can do sth with our returned data here-- like chain promises
+
+        // 2.
+        // postData('/addAnimal', data)
+    }   catch(error) {
+        // appropriately handle the error
+        console.log("error", error);
+    }
+}
 
 /* Update UI Demo */
 const updateUI = async () => {
@@ -194,9 +217,13 @@ const updateUI = async () => {
         document.getElementById('temp').innerHTML ='Temperature: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
         document.getElementById('desc').innerHTML = 'Forecast: ' + allData.description;
-        document.getElementById('country').innerHTML ='Country: ' + allData.country;
+        // document.getElementById('country').innerHTML ='Country: ' + allData.country;
         //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
         document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
+        document.getElementById('region').innerHTML = "Region: " + allData.region;
+        document.getElementById('language').innerHTML = "Language: " + allData.language;
+        document.getElementById('currency').innerHTML = "Currency: " + allData.currency;
+
     }catch(error){
         console.log("error", error)
     }

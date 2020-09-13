@@ -88,6 +88,18 @@ function getPixabayData (req, res){
     console.log(projectData)
 }
 
+app.post('/addCountryData', getCountryData);
+
+function getCountryData (req, res){
+    projectData.currency = req.body.currency;
+    projectData.region = req.body.region;
+    projectData.language = req.body.language;
+
+    res.send(projectData) //send projectData to the server
+    console.log(projectData)
+}
+
+
 app.get('/all', getData) //In this case get sends the data to the app.js. Every GET request produces a request, which is the data provided by the GET request, and a response, which is the data returned to the GET request
 
 function getData(req, res){
