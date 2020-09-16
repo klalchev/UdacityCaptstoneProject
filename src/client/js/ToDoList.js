@@ -1,5 +1,65 @@
 // Create a new list item when clicking on the "Add" button
 function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  //document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  var closed = document.getElementsByClassName('close');
+
+  for (let i = 0; i < closed.length; i++) {
+    closed[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+
+  var list = document.querySelector('ul');
+  list.onclick = function (ev) {
+    if (ev.target.nodeName === 'LI') {
+      ev.target.classList.toggle('checked');
+    }
+  }
+}
+
+/*
+function checkItem (ev) {
+  // var list = document.querySelector('ul');
+  // list.addEventListener('click', function(ev) {
+  if (ev.target.nodeName === 'LI') {
+      ev.target.classList.toggle('checked');
+  }
+}
+*/
+
+export {newElement}
+// export {checkItem}
+
+
+
+
+
+
+
+
+
+
+
+// Create a new list item when clicking on the "Add" button
+/*
+function newElement() {
     var li = document.createElement("li");
     var inputValue = document.getElementById("myInput").value;
     var t = document.createTextNode(inputValue);
@@ -40,11 +100,7 @@ function checkItem (ev) {
 // list.addEventListener('click', function(ev) {
 if (ev.target.tagName === 'LI') {
     ev.target.classList.toggle('checked');
-  }
-else {
-    ev.target.classList.toggle('unchecked');
-}
-}
+};
 
 export {newElement}
 export {addCloseButton}
@@ -52,5 +108,5 @@ export {removeList}
 export {checkItem}
 
 //false);
-
+*/
 // Do a toggle expand/ shrink function
