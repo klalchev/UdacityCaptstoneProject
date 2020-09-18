@@ -34,6 +34,12 @@ function newElement() {
   }
 }
 
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
 /*
 function checkItem (ev) {
   // var list = document.querySelector('ul');
@@ -45,9 +51,10 @@ function checkItem (ev) {
 */
 
 export {newElement}
+export {myFunction}
 // export {checkItem}
 
-
+// add a toggle to shrink and expand the ToDoList
 
 
 

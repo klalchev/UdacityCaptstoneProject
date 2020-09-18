@@ -2,6 +2,7 @@ import {performAction} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
 import {newElement} from './js/ToDoList'
+import {myFunction} from './js/ToDoList'
 //import {addCloseButton} from './js/ToDoList'
 //import {removeList} from './js/ToDoList'
 //import {checkItem} from './js/ToDoList'
@@ -15,6 +16,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('.addBtn').addEventListener('click', () => {
         newElement();
     // addCloseButton();
+    });
+    document.querySelector('.dropdown').addEventListener('click', () => {
+        myFunction();
     });
 });
 
@@ -34,12 +38,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 import './styles/style.scss'
 import './styles/toDoStyling.scss'
+import './styles/dropdownList.scss'
 
 export {
     performAction,
     func,
     distance,
     newElement,
+    myFunction
     //addCloseButton,
     //removeList,
     //checkItem
