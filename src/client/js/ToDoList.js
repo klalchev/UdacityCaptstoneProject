@@ -1,3 +1,5 @@
+/*
+//Version One (working)
 // Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
@@ -34,86 +36,57 @@ function newElement() {
   }
 }
 
+//When the user clicks on the button, toggle between hiding and showing the dropdown content
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+export {newElement}
+export {myFunction}
+*/
+
+//Version Two (refactored)
+// Create a new list item when clicking on the "Add" button
+// Constants for setting the elements ids
+const todoEntryID = "todo-entry";
+const todoTextID = "todo-text";
+const todoEntryDeleteElementID = "delete-todo-entry";
+function newElement() {
+  // Fetching the input value
+  const inputValue = document.getElementById("myInput").value;
+  // If input value is empty then alerting and exiting
+  if (inputValue === '') {
+    alert("You must write something!");
+    return "";
+  }
+  // The list element for todo
+  var todoEntry = document.createElement("li");
+  todoEntry.id = todoEntryID;
+  // The text element within the todo list element
+  var spanElementForText = document.createElement("span");
+  spanElementForText.id = todoTextID;
+  var textElement = document.createTextNode(inputValue);
+ spanElementForText.appendChild(textElement);
+  // The Close button within the todo list
+  var spanElementForClose = document.createElement("span");
+  spanElementForClose.id = todoEntryDeleteElementID;
+  var closeSymbol = document.createTextNode("\u00D7");
+spanElementForClose.appendChild(closeSymbol);
+  // Inserting both the text and close button inside the todo list element
+  todoEntry.appendChild(spanElementForText);
+  todoEntry.appendChild(spanElementForClose);
+// Inserting the todo list element inside the todo list
+document.getElementById("myUL").appendChild(todoEntry);
+}
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
-
-/*
-function checkItem (ev) {
-  // var list = document.querySelector('ul');
-  // list.addEventListener('click', function(ev) {
-  if (ev.target.nodeName === 'LI') {
-      ev.target.classList.toggle('checked');
-  }
+// Exporting constants also, to use them in index.js
+export {
+  newElement,
+  myFunction,
+  todoEntryDeleteElementID,
+  todoTextID
 }
-*/
-
-export {newElement}
-export {myFunction}
-// export {checkItem}
-
-// add a toggle to shrink and expand the ToDoList
-
-
-
-
-
-
-
-
-
-// Create a new list item when clicking on the "Add" button
-/*
-function newElement() {
-    var li = document.createElement("li");
-    var inputValue = document.getElementById("myInput").value;
-    var t = document.createTextNode(inputValue);
-    li.appendChild(t);
-    if (inputValue === '') {
-      alert("You must write something!");
-    } else {
-      document.getElementById("myUL").appendChild(li);
-    }
-}
-
-// Create a "close" button and append it to each list item
-function addCloseButton() {
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
-}
-
-// Click on a close button to hide the current list item
-function removeList () {
-//var close = document.getElementsByClassName("close");
-//var i;
-//for (i = 0; i < close.length; i++) {
-//  close[i].onclick = function() {
-var div = this.parentElement;
-    div.style.display = "none";
-}
-
-// Add a "checked" symbol when clicking on a list item
-function checkItem (ev) {
-// var list = document.querySelector('ul');
-// list.addEventListener('click', function(ev) {
-if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-};
-
-export {newElement}
-export {addCloseButton}
-export {removeList}
-export {checkItem}
-
-//false);
-*/
-// Do a toggle expand/ shrink function

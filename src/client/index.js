@@ -1,8 +1,9 @@
 import {performAction} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
-import {newElement} from './js/ToDoList'
-import {myFunction} from './js/ToDoList'
+import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
+
+//import {myFunction} from './js/ToDoList'
 //import {addCloseButton} from './js/ToDoList'
 //import {removeList} from './js/ToDoList'
 //import {checkItem} from './js/ToDoList'
@@ -13,14 +14,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
         performAction();
         func();
     });
+
     document.querySelector('.addBtn').addEventListener('click', () => {
         newElement();
     // addCloseButton();
     });
+
     document.querySelector('.dropdown').addEventListener('click', () => {
         myFunction();
     });
 });
+
+// Putting a click event listener on the whole document so we can target specific target elements later on
+document.addEventListener('click', (event) => {
+    if(event.target.id === todoEntryDeleteElementID) {
+        event.target.parentElement.style.display = "none";
+    }
+    if(event.target.id === todoTextID) {
+        event.target.parentElement.classList.toggle('checked');
+    }
+})
 
 /*
     document.querySelector('.close').addEventListener('click', () => {
