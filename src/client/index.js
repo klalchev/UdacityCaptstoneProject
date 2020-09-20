@@ -1,7 +1,9 @@
 import {performAction} from './js/app'
+import {updateUI} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
 import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
+import {saveTrip, deleteTrip} from './js/localeStorage'
 
 //import {myFunction} from './js/ToDoList'
 //import {addCloseButton} from './js/ToDoList'
@@ -35,6 +37,14 @@ document.addEventListener('click', (event) => {
     }
 })
 
+document.getElementById('save').addEventListener('submit', () => {
+    saveTrip();
+});
+
+document.getElementById('delete').addEventListener('click', () => {
+    deleteTrip();
+});
+
 /*
     document.querySelector('.close').addEventListener('click', () => {
         removeList();
@@ -55,10 +65,13 @@ import './styles/dropdownList.scss'
 
 export {
     performAction,
+    updateUI,
     func,
     distance,
     newElement,
-    myFunction
+    myFunction,
+    saveTrip,
+    deleteTrip
     //addCloseButton,
     //removeList,
     //checkItem

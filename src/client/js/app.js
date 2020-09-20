@@ -230,3 +230,4 @@ const updateUI = async () => {
 }
 
 export {performAction}
+export {updateUI}
