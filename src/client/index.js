@@ -1,9 +1,8 @@
 import {performAction} from './js/app'
-import {updateUI} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
 import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
-import {saveTrip, deleteTrip} from './js/localeStorage'
+import {tripsArray, saveTrip, deleteTrip} from './js/localStorage'
 
 //import {myFunction} from './js/ToDoList'
 //import {addCloseButton} from './js/ToDoList'
@@ -65,13 +64,13 @@ import './styles/dropdownList.scss'
 
 export {
     performAction,
-    updateUI,
     func,
     distance,
     newElement,
     myFunction,
+    tripsArray,
     saveTrip,
-    deleteTrip
+    deleteTrip,
     //addCloseButton,
     //removeList,
     //checkItem

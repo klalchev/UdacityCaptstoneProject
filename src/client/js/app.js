@@ -1,5 +1,7 @@
 // import { func } from "./countdown";
 
+import { deleteTrip, saveTrip } from "./localStorage";
+
 async function performAction(e){
     // event.preventdefault()
 
@@ -224,10 +226,13 @@ const updateUI = async () => {
         document.getElementById('language').innerHTML = "Language: " + allData.language;
         document.getElementById('currency').innerHTML = "Currency: " + allData.currency;
 
+        Client.saveTrip(allData);
+        //Client.checkStorage(allData);
+        //Client.deleteTrip(allData);
+
     }catch(error){
         console.log("error", error)
     }
 }
 
 export {performAction}
-export {updateUI}

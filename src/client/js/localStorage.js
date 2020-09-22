@@ -1,31 +1,32 @@
-let apiObject = Client.updateUI();
-const ul = document.getElementById('entryHolder');
+//const ul = document.getElementById('entryHolder');
 let tripsArray = localStorage.getItem('items')
     ? JSON.parse(localStorage.getItem('items'))
     : []
 
-localStorage.setItem('items', JSON.stringify(itemsArray))
-const data = JSON.parse(localStorage.getItem('items'))
+localStorage.setItem('items', JSON.stringify(tripsArray))
+/*const data = JSON.parse(localStorage.getItem('items'))*/
 
-function saveTrip (e) {
-    e.preventDefault()
+function saveTrip (myData) {
+    //e.preventDefault()
 
-    tripsArray.push(apiObject)
+    tripsArray.push(myData)
     localStorage.setItem('items', JSON.stringify(tripsArray))
 }
 
-
-data.forEach(function savedEntires(item) {
+/*
+function checkStorage (tripData)
+data.forEach((item) => {
     const li = document.createElement('li')
-    li.innerHTML = apiObject.date + ', ' + apiObject.temp + ', ' + apiObject.trip + ', ' + apiObject.country + apiObject.description + apiObject.language;
+    li.innerHTML = tripData.date + ', ' + tripData.temp + ', ' + tripData.trip + ', ' + tripData.country + tripData.description + tripData.language;
     ul.appendchild(li)
-})
+})*/
 
 function deleteTrip () {
+    //e.preventDefault()
     localStorage.clear()
-    while (ul.firstChild) {
+    /*while (ul.firstChild) {
         ul.removeChild(ul.firstChild)
-    }
+    }*/
 }
 
 /*
@@ -38,10 +39,10 @@ const getProjectData = async () => {
     }catch(error){
         console.log("error", error)
     }
-}
 */
 
 export {
+    tripsArray,
     saveTrip,
     deleteTrip
 }
