@@ -226,13 +226,15 @@ const updateUI = async () => {
         document.getElementById('language').innerHTML = "Language: " + allData.language;
         document.getElementById('currency').innerHTML = "Currency: " + allData.currency;
 
-        Client.saveTrip(allData);
+        //Client.saveTrip(allData);
         //Client.checkStorage(allData);
         //Client.deleteTrip(allData);
 
     }catch(error){
         console.log("error", error)
+        localStorage.getItem('items')
+        //JSON.parse(window.localStorage.getItem('items'))
     }
 }
 
-export {performAction}
+export {performAction, updateUI}

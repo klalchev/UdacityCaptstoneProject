@@ -1,4 +1,4 @@
-import {performAction} from './js/app'
+import {performAction, updateUI} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
 import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
@@ -10,6 +10,9 @@ import {tripsArray, saveTrip, deleteTrip} from './js/localStorage'
 //import {checkItem} from './js/ToDoList'
 
 document.addEventListener('DOMContentLoaded', (event) => {
+    //call function to update localStorage
+    updateUI();
+
     // install listeners here
     document.getElementById('generate').addEventListener('click', () => {
         performAction();
@@ -24,6 +27,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('.dropdown').addEventListener('click', () => {
         myFunction();
     });
+
+    document.getElementById('save').addEventListener('click', () => {
+        saveTrip();
+    });
+
+    document.getElementById('delete').addEventListener('click', () => {
+        deleteTrip();
+    });
 });
 
 // Putting a click event listener on the whole document so we can target specific target elements later on
@@ -35,14 +46,6 @@ document.addEventListener('click', (event) => {
         event.target.parentElement.classList.toggle('checked');
     }
 })
-
-document.getElementById('save').addEventListener('submit', () => {
-    saveTrip();
-});
-
-document.getElementById('delete').addEventListener('click', () => {
-    deleteTrip();
-});
 
 /*
     document.querySelector('.close').addEventListener('click', () => {
@@ -64,6 +67,7 @@ import './styles/dropdownList.scss'
 
 export {
     performAction,
+    updateUI,
     func,
     distance,
     newElement,
