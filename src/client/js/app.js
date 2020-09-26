@@ -47,7 +47,7 @@ async function performAction(e){
                   // Also, you want to do a func call before performAction reaches the if conditional on Client.distance to avoid another potential race condition. Note that I forced a func call right before comparison kicks in. That way, you are sure that the thing actually got a calculation once before other JS kicked in
    if (Client.distance> 604800000) {
        const myData = await updateWeather(res);
-       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
+       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description, icon: myData.data[0].weather.icon});
 
        console.log(Client.distance);
        console.log(myData);
@@ -55,7 +55,7 @@ async function performAction(e){
    }
    else {
        const myDailyForecast = await dailyForecast(res);
-       const weatherBitDaily = await postData('/addWeatherBit', {temp: myDailyForecast.data[0].temp, description: myDailyForecast.data[0].weather.description});
+       const weatherBitDaily = await postData('/addWeatherBit', {temp: myDailyForecast.data[0].temp, description: myDailyForecast.data[0].weather.description, icon: myDailyForecast.data[0].weather.icon});
 
        console.log(Client.distance);
        console.log(myDailyForecast);
@@ -218,8 +218,9 @@ const updateUI = async () => {
         document.getElementById('date').innerHTML ='Departing: ' + allData.date;
         document.getElementById('temp').innerHTML ='Temperature: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
-        document.getElementById('desc').innerHTML = 'Forecast: ' + allData.description;
-        // document.getElementById('country').innerHTML ='Country: ' + allData.country;
+        document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
+        //document.getElementById('icon').innerHTML =`<img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
+        //document.getElementById('country').innerHTML ='Country: ' + allData.country;
         //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
         document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
         document.getElementById('region').innerHTML = "Region: " + allData.region;

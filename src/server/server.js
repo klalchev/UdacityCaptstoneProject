@@ -54,6 +54,7 @@ app.post('/addWeatherBit', getWeatherData)
 function getWeatherData(req, res){
    projectData.temp= req.body.temp; // How to add a new key to the projectdata object
    projectData.description= req.body.description;
+   projectData.icon= req.body.icon;
 
    res.send(projectData) //send projectData to the server
    console.log(projectData)
