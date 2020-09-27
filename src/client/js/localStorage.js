@@ -20,12 +20,16 @@ async function deleteTrip () {
     await localStorage.clear()
 }
 
-const tripsArray = [];
+async function checkStorage () {
+    await localStorage.getItem('items');
+}
+
+//const tripsArray = [];
 
 export {
-    tripsArray,
     saveTrip,
-    deleteTrip
+    deleteTrip,
+    checkStorage
 }
 
 /*

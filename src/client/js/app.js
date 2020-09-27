@@ -1,6 +1,5 @@
 // import { func } from "./countdown";
-
-import { deleteTrip, saveTrip } from "./localStorage";
+// import { deleteTrip, saveTrip } from "./localStorage";
 
 async function performAction(e){
     // event.preventdefault()
@@ -233,7 +232,7 @@ const updateUI = async () => {
 
     }catch(error){
         console.log("error", error)
-        localStorage.getItem('items')
+        //localStorage.getItem('items')
         //JSON.parse(window.localStorage.getItem('items'))
     }
 }

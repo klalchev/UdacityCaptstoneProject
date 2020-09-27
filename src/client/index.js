@@ -2,7 +2,7 @@ import {performAction, updateUI} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
 import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
-import {tripsArray, saveTrip, deleteTrip} from './js/localStorage'
+import {saveTrip, deleteTrip, checkStorage} from './js/localStorage'
 
 //import {myFunction} from './js/ToDoList'
 //import {addCloseButton} from './js/ToDoList'
@@ -10,8 +10,10 @@ import {tripsArray, saveTrip, deleteTrip} from './js/localStorage'
 //import {checkItem} from './js/ToDoList'
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    //call function to update localStorage
-    updateUI();
+    //call function to check localStorage content
+    checkStorage();
+
+    //updateUI();
 
     // install listeners here
     document.getElementById('generate').addEventListener('click', () => {
@@ -72,7 +74,7 @@ export {
     distance,
     newElement,
     myFunction,
-    tripsArray,
+    checkStorage,
     saveTrip,
     deleteTrip,
     //addCloseButton,
