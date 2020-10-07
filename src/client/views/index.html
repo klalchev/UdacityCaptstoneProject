@@ -8,36 +8,36 @@
 </head>
  <body>
 <div id = "app">
-  <div class ="holder headline">
-    Weather Journal App
-  </div>
-  <button onclick="window.print()">Print this trip</button>
+  <h1 class ="holder headline">
+    Travel Planner
+  </h1>
+  <button class ="print" onclick="window.print()">Print this trip</button>
   <div class ="holder city">
     <label for="city">Enter city here</label>
-    <input type="text" id="city" placeholder="enter city here">
+    <input type="text" id="city" placeholder="Your Destination">
   </div>
   <div class ="holder feel">
-    <label for="departure">Enter Departure date: MM/DD/YYYY</label>
-    <!--<textarea class= "myInput" id="departure" placeholder="Enter your departure date here" rows="9" cols="50"></textarea>-->
-    <input type="date" class="myInput" id="departure" placeholder="Enter your departure date here" max="2021-12-31" rows="9" cols="50"> <!--Consider using input type=date for your date input in the HTML form. You will thank yourself as a developer -- it makes adding dates way easier-->
+      <label for="departure">Enter Departure date: MM/DD/YYYY</label>
+      <!--<textarea class= "myInput" id="departure" placeholder="Enter your departure date here" rows="9" cols="50"></textarea>-->
+      <input type="date" class="myInput" id="departure" placeholder="Enter your departure date here" max="2021-12-31" rows="9" cols="50"> <!--Consider using input type=date for your date input in the HTML form. You will thank yourself as a developer -- it makes adding dates way easier-->
     <button id="generate" type = "submit"> Generate </button>
   </div>
-  <button id ="save">Save Trip</button>
-  <button id ="delete">Remove Trip</button>
+  <button class ="saveBtn" id ="save">Save Trip</button>
+  <button class ="deleteBtn" id ="delete">Remove Trip</button>
   <div class ="holder entry">
-    <div class = "title">Most Recent Entry</div>
+    <div class ="title">Most Recent Entry</div>
     <div id = "entryHolder">
       <div id= "image"></div>
-      <div id = "temp"></div>
-      <div id = "trip"></div>
-      <div id = "date"></div>
-      <div id = "desc"></div>
+      <div class ="temp" id = "temp"></div>
+      <div class ="trip" id = "trip"></div>
+      <div class ="date" id = "date"></div>
+      <div class ="description" id = "desc"></div>
       <div id = "icon"></div>
       <div id = "country"></div>
-      <div id = "departureDay"></div>
-      <div id = "region"></div>
-      <div id = "language"></div>
-      <div id = "currency"></div>
+      <div class ="departureDay" id = "departureDay"></div>
+      <div class ="region" id = "region"></div>
+      <div class ="language" id = "language"></div>
+      <div class ="currency" id = "currency"></div>
     </div>
   </div>
 

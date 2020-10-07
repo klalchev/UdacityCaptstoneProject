@@ -217,13 +217,13 @@ const updateUI = async () => {
         console.log(allData);
 
         document.getElementById('date').innerHTML ='Departing: ' + allData.date;
-        document.getElementById('temp').innerHTML ='Temperature: ' + allData.temp;
+        document.getElementById('temp').innerHTML ='Typical Temperature for this day is: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
         document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
         //document.getElementById('icon').innerHTML =`<img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
         //document.getElementById('country').innerHTML ='Country: ' + allData.country;
         //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
-        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
+        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination" width=480px and height=309px></img>`; // you can also add width=480px and height=309px- see NASA API fetch
         document.getElementById('region').innerHTML = "Region: " + allData.region;
         document.getElementById('language').innerHTML = "Language: " + allData.language;
         document.getElementById('currency').innerHTML = "Currency: " + allData.currency;
