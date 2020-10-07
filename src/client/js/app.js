@@ -80,6 +80,8 @@ async function performAction(e){
    updateUI();
 }
 
+//there are 2 ways to do the chained promises: 1) To use async and await; 2) to use async and .then chained promises as shown above
+
 /* POST Example */
 const postData = async ( url = '', data = {})=>{
     //console.log(data);
@@ -121,7 +123,7 @@ const getWeatherDemo = async (baseURL)=>{
         console.log("error", error);
     }
 }
-
+//getWeatherDemo is async because it fetches the API and waits its response
 
 const updateWeather = async (weatherData)=>{
     //1.
@@ -153,9 +155,9 @@ const dailyForecast = async (dailyForecastData)=>{
     //const res = await fetch('/fakePictureData')
     try {
 
-        const data = await res.json(); // res.json() is the data you fetch
+        const data = await res.json(); // res.json() is the data you fetch. If the API response is successful assign it to const data
         console.log(data)
-        return data;
+        return data; //return const data when function is called
         // 1. We can do sth with our returned data here-- like chain promises
 
         // 2.

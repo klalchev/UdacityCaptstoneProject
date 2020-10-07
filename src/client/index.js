@@ -11,9 +11,13 @@ import {saveTrip, deleteTrip, checkStorage} from './js/localStorage'
 
 document.addEventListener('DOMContentLoaded', (event) => {
     //call function to check localStorage content
-    checkStorage();
-
-    //updateUI();
+    const storedData = JSON.parse(checkStorage()) // parses checkStorage() returned data from a string to an object and returns {"lat":"42.25", "lng":"-71.06", "trip": etc. } object, but does not return the 'items' key. That is why, in index.js we use lat and lng keys to access data and not 'items' key
+    console.log(storedData);
+    if (storedData != null) {
+        document.getElementById('city').value = storedData.trip; // checkStorage() returns just the object value, without the 'items' key
+        document.getElementById('departure').value = storedData.date;
+        document.getElementById('country').innerHTML = 'Country: ' + storedData.country;
+    }
 
     // install listeners here
     document.getElementById('generate').addEventListener('click', () => {

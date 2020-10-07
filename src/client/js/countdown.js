@@ -24,7 +24,7 @@ const countDownDate = new Date(countDown).getTime();
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  // Display the result in the element with id="demo"
+  // Display the result in the element with id="demo". This cond. statement assures that the countdown is not showing up in the browser until a departure date is entered
   if (document.getElementById("departure").value !="") {
   document.getElementById("departureDay").innerHTML ='Remaining time to trip: '+ days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
