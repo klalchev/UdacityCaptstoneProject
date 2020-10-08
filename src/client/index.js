@@ -1,4 +1,4 @@
-import {performAction, updateUI} from './js/app'
+import {performAction, updateUI, getWeatherDemo} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
 import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
@@ -74,6 +74,7 @@ import './styles/dropdownList.scss'
 export {
     performAction,
     updateUI,
+    getWeatherDemo,
     func,
     distance,
     newElement,

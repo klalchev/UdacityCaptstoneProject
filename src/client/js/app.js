@@ -1,6 +1,3 @@
-// import { func } from "./countdown";
-// import { deleteTrip, saveTrip } from "./localStorage";
-
 async function performAction(e){
     // event.preventdefault()
 
@@ -239,4 +236,4 @@ const updateUI = async () => {
     }
 }
 
-export {performAction, updateUI}
+export {performAction, updateUI, getWeatherDemo}

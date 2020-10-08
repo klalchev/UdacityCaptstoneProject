@@ -163,7 +163,16 @@ button{
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+
+    &:hover {
+        background: cadetblue;
+    }
+
+    &:visited {
+        background: fuchsia;
+    }
 }
+
 h1{
     font-size: 26px;
     text-align: center;

@@ -1,10 +1,13 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {}; // can not be cost because it is being reassigned each time we fetch a new zip code object
+let projectData = {}; // can not be cost because it is being reassigned each time we fetch a new zip code object
 
 var path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const mockAPIResponse = require('./mockAPI.js');
+//The dotenv package and the associated process.env object can only be done in the express server file
+//you cannot do this on the frontend code. To use the dotenv, you will need to move the API calls to the server
 
 const app = express()
 app.use(cors());
@@ -108,6 +111,14 @@ function getData(req, res){
     console.log(projectData)
 }
 
+app.get('/test', function (req, res) {
+    res.send(mockAPIResponse)
+})
+
 /*
 app.get('/all', (_, s) => s.send(projectData)); //short way to right the same get route as the one above
 */
+
+//module.exports = app
+//You want to allow each test file to start a server on their own. To do this,
+//you need to export app without listening to it.
