@@ -1,3 +1,5 @@
+const fetch = require('node-fetch') //Since jest run on node environment which does not have fetch API like in a browser, it is producing referenceError. To fix this I used node-fetch module to require fetch in app.js (check the updated answer)
+
 async function performAction(e){
     // event.preventdefault()
 
@@ -236,4 +238,4 @@ const updateUI = async () => {
     }
 }
 
-export {performAction, updateUI, getWeatherDemo}
+export {performAction, updateUI, getWeatherDemo, restCountries, pixabay}

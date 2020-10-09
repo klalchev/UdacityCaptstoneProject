@@ -1,4 +1,4 @@
-import {performAction, updateUI, getWeatherDemo} from './js/app'
+import {performAction, updateUI, getWeatherDemo, restCountries, pixabay} from './js/app'
 import {func} from './js/countdown'
 import {distance} from './js/countdown'
 import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
@@ -75,6 +75,8 @@ export {
     performAction,
     updateUI,
     getWeatherDemo,
+    restCountries,
+    pixabay,
     func,
     distance,
     newElement,

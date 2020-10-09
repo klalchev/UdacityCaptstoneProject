@@ -5,7 +5,7 @@ var path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require("cors");
-const mockAPIResponse = require('./mockAPI.js');
+const mockAPIResponse = require('./mockAPI.js'); //we can require it because of 'module.exports = json' in mockAPI.js - that is how we export the mockAPI json object
 //The dotenv package and the associated process.env object can only be done in the express server file
 //you cannot do this on the frontend code. To use the dotenv, you will need to move the API calls to the server
 
@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
     // res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
-// designates what port the app will listen to for incoming requests
+// designates what port the app server will listen to for incoming requests
 app.listen(4040, function () {
     console.log('Example app listening on port 4040!')
 })
@@ -119,6 +119,6 @@ app.get('/test', function (req, res) {
 app.get('/all', (_, s) => s.send(projectData)); //short way to right the same get route as the one above
 */
 
-//module.exports = app
+module.exports = app
 //You want to allow each test file to start a server on their own. To do this,
-//you need to export app without listening to it.
+//you need to export app express server without listening to it. Exported app will be used in server.spec.js
