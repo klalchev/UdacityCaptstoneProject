@@ -1,7 +1,6 @@
 const fetch = require('node-fetch') //Since jest run on node environment which does not have fetch API like in a browser, it is producing referenceError. To fix this I used node-fetch module to require fetch in app.js (check the updated answer)
 
 async function performAction(e){
-    // event.preventdefault()
 
     // Create a new date instance dynamically with JS
     let d = new Date();
@@ -21,69 +20,46 @@ async function performAction(e){
 
     const newCityEncode = encodeURI(newCity);
     const uriPixabay = `https://pixabay.com/api/?key=${pixabayKey}&q=${newCityEncode}&category=travel&image_type=photo`;
-    // const uriPixabayEncode = encodeURIComponent(uriPixabay);
 
-    /*
-    getWeatherDemo(url)
-    .then(function(data){   // the variable data declared in getWeatherDemo function. These are chained promises. function(data) passes the received data to the postData request
+    const geonamesData =await getWeatherDemo(url);
+    const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: date, trip: newCity});
 
-    console.log(data);
-    postData('/addCity', {lat: data.geonames[0].lat, lng: data.geonames[0].lng, country: data.geonames[0].countryName, date: newDate, trip: newCity} ) //HOW TO ACCESS AN OBJECT WITHIN AN ARRAY WITHIN AN OBJECT: description: data.weather[2].description https://stackoverflow.com/questions/11922383/how-can-i-access-and-process-nested-objects-arrays-or-json
-    })
-        .then(res=>updateWeather(res))
-            .then(function(myData){
-            postData('/addWeatherBit', {temp: myData.data[0].temp, description: myData.data[0].weather.description})
-
-            updateUI()
-        })
-*/
-
-   const geonamesData =await getWeatherDemo(url);
-   const res = await postData('/addCity', {lat: geonamesData.geonames[0].lat, lng: geonamesData.geonames[0].lng, country: geonamesData.geonames[0].countryName, date: date, trip: newCity});
-
-   Client.func(); // exporting a function to index.js and accessing it using client library has the potential to break jest tests. Jest does not use webpack and has no idea of what Client is. It is hence generally a better proposal to import the function directly into your top level JS and use it there. So we would use sth like this in countdown.js export const func = ... and in app.js import {func} from "countdown.js"
+    Client.func(); // exporting a function to index.js and accessing it using client library has the potential to break jest tests. Jest does not use webpack and has no idea of what Client is. It is hence generally a better proposal to import the function directly into your top level JS and use it there. So we would use sth like this in countdown.js export const func = ... and in app.js import {func} from "countdown.js"
                   // Also, you want to do a func call before performAction reaches the if conditional on Client.distance to avoid another potential race condition. Note that I forced a func call right before comparison kicks in. That way, you are sure that the thing actually got a calculation once before other JS kicked in
-   if (Client.distance> 604800000) {
+    if (Client.distance> 604800000) {
        const myData = await updateWeather(res);
        const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description, icon: myData.data[0].weather.icon});
 
        console.log(Client.distance);
        console.log(myData);
        console.log(weatherBitInfo);
-   }
-   else {
+    }
+    else {
        const myDailyForecast = await dailyForecast(res);
        const weatherBitDaily = await postData('/addWeatherBit', {temp: myDailyForecast.data[0].temp, description: myDailyForecast.data[0].weather.description, icon: myDailyForecast.data[0].weather.icon});
 
        console.log(Client.distance);
        console.log(myDailyForecast);
        console.log(weatherBitDaily);
-   }
+    }
 
-   // const myData = await updateWeather(res);
+    const countryData = await restCountries (res);
+    const myCountryData = await postData ('/addCountryData', {currency: countryData[0].currencies[0].name, region: countryData[0].subregion, language: countryData[0].languages[0].name});
 
-   // const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description});
+    const pixabayData= await pixabay (uriPixabay);
+    const myPixabayData = await postData('/addPixabayData', {image: pixabayData.hits[0].webformatURL});
 
-   // console.log(myData);
-   // console.log(weatherBitInfo);
+    console.log(pixabayData);
+    console.log(myPixabayData);
 
-   const countryData = await restCountries (res);
-   const myCountryData = await postData ('/addCountryData', {currency: countryData[0].currencies[0].name, region: countryData[0].subregion, language: countryData[0].languages[0].name});
-
-   const pixabayData= await pixabay (uriPixabay);
-   const myPixabayData = await postData('/addPixabayData', {image: pixabayData.hits[0].webformatURL});
-
-   console.log(pixabayData);
-   console.log(myPixabayData);
-
-   updateUI();
+    updateUI();
 }
 
-//there are 2 ways to do the chained promises: 1) To use async and await; 2) to use async and .then chained promises as shown above
+//there are 2 ways to do the chained promises: 1) To use async and await; 2) to use async and .then chained promises
 
 /* POST Example */
 const postData = async ( url = '', data = {})=>{
-    //console.log(data);
+
     const response = await fetch(url, {
     method: 'POST', //*GET, POST, PUT, DELETE - we could get data, post data, put or delete data
     credentials: 'same-origin', //include, *same-origin, omit
@@ -106,8 +82,7 @@ const postData = async ( url = '', data = {})=>{
 const getWeatherDemo = async (baseURL)=>{
     //1.
     const res = await fetch(baseURL)
-    //2. Call Fake API
-    //const res = await fetch('/fakePictureData')
+
     try {
 
         const data = await res.json(); // res.json() is the data you fetch
@@ -115,8 +90,6 @@ const getWeatherDemo = async (baseURL)=>{
         return data;
         // 1. We can do sth with our returned data here-- like chain promises
 
-        // 2.
-        // postData('/addAnimal', data)
     }   catch(error) {
         // appropriately handle the error
         console.log("error", error);
@@ -128,8 +101,7 @@ const updateWeather = async (weatherData)=>{
     //1.
     const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
     const res = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${weatherData.lat}&lon=${weatherData.lng}&key=${weatherBitKey}`) //forecastAPI
-    //2. Call Fake API
-    //const res = await fetch('/fakePictureData')
+
     try {
 
         const data = await res.json(); // res.json() is the data you fetch
@@ -137,21 +109,17 @@ const updateWeather = async (weatherData)=>{
         return data;
         // 1. We can do sth with our returned data here-- like chain promises
 
-        // 2.
-        // postData('/addAnimal', data)
     }   catch(error) {
         // appropriately handle the error
         console.log("error", error);
     }
 }
 
-
 const dailyForecast = async (dailyForecastData)=>{
     //1.
     const weatherBitKey = '7fa5a67defbd48f8a9001a8eff943b3a';
     const res = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${dailyForecastData.lat}&lon=${dailyForecastData.lng}&key=${weatherBitKey}`) //dailyAPI
-    //2. Call Fake API
-    //const res = await fetch('/fakePictureData')
+
     try {
 
         const data = await res.json(); // res.json() is the data you fetch. If the API response is successful assign it to const data
@@ -159,8 +127,6 @@ const dailyForecast = async (dailyForecastData)=>{
         return data; //return const data when function is called
         // 1. We can do sth with our returned data here-- like chain promises
 
-        // 2.
-        // postData('/addAnimal', data)
     }   catch(error) {
         // appropriately handle the error
         console.log("error", error);
@@ -170,8 +136,7 @@ const dailyForecast = async (dailyForecastData)=>{
 const pixabay = async (pixabayURL)=>{
     //1.
     const res = await fetch(pixabayURL)
-    //2. Call Fake API
-    //const res = await fetch('/fakePictureData')
+
     try {
 
         const data = await res.json(); // res.json() is the data you fetch
@@ -179,8 +144,6 @@ const pixabay = async (pixabayURL)=>{
         return data;
         // 1. We can do sth with our returned data here-- like chain promises
 
-        // 2.
-        // postData('/addAnimal', data)
     }   catch(error) {
         // appropriately handle the error
         console.log("error", error);
@@ -191,8 +154,7 @@ const pixabay = async (pixabayURL)=>{
 const restCountries = async (countriesData)=>{
     //1.
     const res = await fetch(`https://restcountries.eu/rest/v2/name/${countriesData.country}`) //dailyAPI
-    //2. Call Fake API
-    //const res = await fetch('/fakePictureData')
+
     try {
 
         const data = await res.json(); // res.json() is the data you fetch
@@ -200,8 +162,6 @@ const restCountries = async (countriesData)=>{
         return data;
         // 1. We can do sth with our returned data here-- like chain promises
 
-        // 2.
-        // postData('/addAnimal', data)
     }   catch(error) {
         // appropriately handle the error
         console.log("error", error);
@@ -219,22 +179,13 @@ const updateUI = async () => {
         document.getElementById('temp').innerHTML ='Typical Temperature for this day is: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
         document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
-        //document.getElementById('icon').innerHTML =`<img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
-        //document.getElementById('country').innerHTML ='Country: ' + allData.country;
-        //document.getElementById('content').innerHTML = 'Feeling: ' + allData.fav;
         document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination" width=480px and height=309px></img>`; // you can also add width=480px and height=309px- see NASA API fetch
         document.getElementById('region').innerHTML = "Region: " + allData.region;
         document.getElementById('language').innerHTML = "Language: " + allData.language;
         document.getElementById('currency').innerHTML = "Currency: " + allData.currency;
 
-        //Client.saveTrip(allData);
-        //Client.checkStorage(allData);
-        //Client.deleteTrip(allData);
-
     }catch(error){
         console.log("error", error)
-        //localStorage.getItem('items')
-        //JSON.parse(window.localStorage.getItem('items'))
     }
 }
 

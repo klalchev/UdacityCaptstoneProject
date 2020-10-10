@@ -3,56 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Weather Journal</title>
-<!--<link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">-->
 </head>
- <body>
-<div id = "app">
-  <h1 class ="holder headline">
-    Travel Planner
-  </h1>
-  <button class ="print" onclick="window.print()">Print this trip</button>
-  <div class ="holder city">
-    <label for="city">Enter city here</label>
-    <input type="text" id="city" placeholder="Your Destination">
-  </div>
-  <div class ="holder feel">
+<body>
+  <div id = "app">
+
+    <h1 class ="holder headline">
+      Travel Planner
+    </h1>
+
+    <button class ="print" onclick="window.print()">Print this trip</button>
+
+    <div class ="holder city">
+      <label for="city">Enter city here</label>
+      <input type="text" id="city" placeholder="Your Destination">
+    </div>
+
+    <div class ="holder feel">
       <label for="departure">Enter Departure date: MM/DD/YYYY</label>
-      <!--<textarea class= "myInput" id="departure" placeholder="Enter your departure date here" rows="9" cols="50"></textarea>-->
       <input type="date" class="myInput" id="departure" placeholder="Enter your departure date here" max="2021-12-31" rows="9" cols="50"> <!--Consider using input type=date for your date input in the HTML form. You will thank yourself as a developer -- it makes adding dates way easier-->
-    <button id="generate" type = "submit"> Generate </button>
-  </div>
-  <button class ="saveBtn" id ="save">Save Trip</button>
-  <button class ="deleteBtn" id ="delete">Remove Trip</button>
-  <div class ="holder entry">
-    <div class ="title">Most Recent Entry</div>
-    <div id = "entryHolder">
-      <div id= "image"></div>
-      <div id = "temp"></div>
-      <div id = "trip"></div>
-      <div id = "date"></div>
-      <div id = "desc"></div>
-      <div id = "icon"></div>
-      <div id = "country"></div>
-      <div id = "departureDay"></div>
-      <div id = "region"></div>
-      <div id = "language"></div>
-      <div id = "currency"></div>
+      <button id="generate" type = "submit"> Generate </button>
     </div>
-  </div>
 
-  <div id="myDIV" class="header">
-    <h2>My To Do List <span class="dropdown">&#10010;</span> </h2>
-    <div id="myDropdown">
-      <input type="text" id="myInput" placeholder="Title...">
-      <span class="addBtn">Add</span>
-      <ul id="myUL"></ul>
+    <button class ="saveBtn" id ="save">Save Trip</button>
+    <button class ="deleteBtn" id ="delete">Remove Trip</button>
+
+    <div class ="holder entry">
+      <div class ="title">Most Recent Entry</div>
+        <div id = "entryHolder">
+        <div id= "image"></div>
+        <div id = "temp"></div>
+        <div id = "trip"></div>
+        <div id = "date"></div>
+        <div id = "desc"></div>
+        <div id = "icon"></div>
+        <div id = "country"></div>
+        <div id = "departureDay"></div>
+        <div id = "region"></div>
+        <div id = "language"></div>
+        <div id = "currency"></div>
+      </div>
     </div>
+
+    <div id="myDIV" class="header">
+      <h2>My To Do List <span class="dropdown">&#10010;</span> </h2>
+      <div id="myDropdown">
+        <input type="text" id="myInput" placeholder="Enter a ToDo Item">
+        <span class="addBtn">Add</span>
+        <ul id="myUL"></ul>
+      </div>
+    </div>
+
   </div>
 
-</div>
-
-<!--<script src="app.js" type="text/javascript"></script>-->
   <script>
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {

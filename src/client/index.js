@@ -4,11 +4,6 @@ import {distance} from './js/countdown'
 import {newElement, myFunction, todoTextID, todoEntryDeleteElementID} from './js/ToDoList'
 import {saveTrip, deleteTrip, checkStorage} from './js/localStorage'
 
-//import {myFunction} from './js/ToDoList'
-//import {addCloseButton} from './js/ToDoList'
-//import {removeList} from './js/ToDoList'
-//import {checkItem} from './js/ToDoList'
-
 document.addEventListener('DOMContentLoaded', (event) => {
     //call function to check localStorage content
     const storedData = JSON.parse(checkStorage()) // parses checkStorage() returned data from a string to an object and returns {"lat":"42.25", "lng":"-71.06", "trip": etc. } object, but does not return the 'items' key. That is why, in index.js we use lat and lng keys to access data and not 'items' key
@@ -17,6 +12,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('city').value = storedData.trip; // checkStorage() returns just the object value, without the 'items' key
         document.getElementById('departure').value = storedData.date;
         document.getElementById('country').innerHTML = 'Country: ' + storedData.country;
+        document.getElementById('image').innerHTML= `<img src=${storedData.image} alt="trip destination" width=480px and height=309px></img>`;
+        document.getElementById('desc').innerHTML =`Forecast: ${storedData.description} <img src= https://www.weatherbit.io/static/img/icons/${storedData.icon}.png></img>`;
     }
 
     // install listeners here
@@ -27,7 +24,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     document.querySelector('.addBtn').addEventListener('click', () => {
         newElement();
-    // addCloseButton();
     });
 
     document.querySelector('.dropdown').addEventListener('click', () => {
@@ -53,20 +49,6 @@ document.addEventListener('click', (event) => {
     }
 })
 
-/*
-    document.querySelector('.close').addEventListener('click', () => {
-        removeList();
-    }); //event listener for checked and removed
-
-    document.getElementById('myUL').addEventListener('click', () => {
-        checkItem();
-    });
-
-
-}); // Event listeners do not affect DOM Loading. It is the other way around. If your JS kicks into action before DOM Loading is done, it can mess up the functions. For instance, imagine trying to install event listener on a button when it is not yet available in DOM. It simply won't work. It is hence advisable to install event listeners only once DOM is do
-
-*/
-
 import './styles/style.scss'
 import './styles/toDoStyling.scss'
 import './styles/dropdownList.scss'
@@ -83,8 +65,5 @@ export {
     myFunction,
     checkStorage,
     saveTrip,
-    deleteTrip,
-    //addCloseButton,
-    //removeList,
-    //checkItem
+    deleteTrip
 }

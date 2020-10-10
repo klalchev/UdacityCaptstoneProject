@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-let projectData = {}; // can not be cost because it is being reassigned each time we fetch a new zip code object
+let projectData = {}; // can not be const because it is being reassigned each time we fetch a new zip code object
 
 var path = require('path')
 const express = require('express')
@@ -20,8 +20,6 @@ console.log(__dirname)
 // Initialize the main project folder
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
-    // res.sendFile('client/views/index.html', {root: __dirname + '/..'})
-    // res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
 // designates what port the app server will listen to for incoming requests
@@ -30,28 +28,6 @@ app.listen(4040, function () {
 })
 
 // Setup Server
-
-/*
-const port = 3000;
-
-const server = app.listen(port, listening); // listen method- when the server has been activated, log the `running on localhost: ${port}`message
-function listening(){
-    // console.log(server);
-    console.log(`running on localhost: ${port}`);
-    console.log('hello');
-};
-*/
-
-//GET Route
-/*
-app.get('/all', getData) //In this case get sends the data to the app.js. Every GET request produces a request, which is the data provided by the GET request, and a response, which is the data returned to the GET request
-
-function getData(req, res){
-    res.send(projectData)
-    console.log(projectData)
-}
-*/
-
 app.post('/addWeatherBit', getWeatherData)
 
 function getWeatherData(req, res){
@@ -114,10 +90,6 @@ function getData(req, res){
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
-
-/*
-app.get('/all', (_, s) => s.send(projectData)); //short way to right the same get route as the one above
-*/
 
 module.exports = app
 //You want to allow each test file to start a server on their own. To do this,
