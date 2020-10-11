@@ -3,7 +3,8 @@
 const todoEntryID = "todo-entry";
 const todoTextID = "todo-text";
 const todoEntryDeleteElementID = "delete-todo-entry";
-function newElement() {
+
+async function newElement() {
   // Fetching the input value
   const inputValue = document.getElementById("myInput").value;
   // If input value is empty then alerting and exiting
@@ -29,12 +30,37 @@ function newElement() {
   todoEntry.appendChild(spanElementForClose);
 // Inserting the todo list element inside the todo list
   document.getElementById("myUL").appendChild(todoEntry);
+  let list = document.getElementById("myUL");
+  await postData ('/myList', {list: list});
 }
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
+
+const postData = async ( url = '', data = {})=>{
+
+  const response = await fetch(url, {
+  method: 'POST', //*GET, POST, PUT, DELETE - we could get data, post data, put or delete data
+  credentials: 'same-origin', //include, *same-origin, omit
+  headers: {
+      'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data), // body data type must match "Content- Type ". Here we attach our data to the body of our POST request
+  });
+
+  try {
+      const newData = await response.json();
+      console.log(newData);
+      return newData;
+  }catch(error) {
+  console.log("error", error);
+  //appropriately handle the error
+  }
+}
+
+
 // Exporting constants also, to use them in index.js
 export {
   newElement,

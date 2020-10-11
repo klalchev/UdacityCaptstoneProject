@@ -25,6 +25,7 @@ function deleteTrip () {
 function checkStorage () {
     return localStorage.getItem('items'); // returns {"lat":"42.25", "lng":"-71.06", "trip": etc. } does not return the 'items' key. That is why, in index.js we use lat and lng keys to access data and not 'items' key
 }
+//This can be cut short as: const checkStorage = _ => localStorage.getItem('items');
 //An async function is anything that takes a noticeable amount of time. Network calls such as getting results from geonames, weatherbit, pixabay or any of the other numerous APIs fall in that category; checkStorage() does not make any network call (call to an API or request to a server route), so it does not need to be async
 
 export {
