@@ -28,7 +28,7 @@ async function performAction(e){
                   // Also, you want to do a func call before performAction reaches the if conditional on Client.distance to avoid another potential race condition. Note that I forced a func call right before comparison kicks in. That way, you are sure that the thing actually got a calculation once before other JS kicked in
     if (Client.distance> 604800000) {
        const myData = await updateWeather(res);
-       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[0].high_temp, description: myData.data[0].weather.description, icon: myData.data[0].weather.icon});
+       const weatherBitInfo = await postData('/addWeatherBit', {temp: myData.data[14].high_temp, description: myData.data[14].weather.description, icon: myData.data[14].weather.icon});
 
        console.log(Client.distance);
        console.log(myData);
@@ -179,7 +179,7 @@ const updateUI = async () => {
         document.getElementById('temp').innerHTML ='Typical Temperature for this day is: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
         document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
-        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination" width=480px and height=309px></img>`; // you can also add width=480px and height=309px- see NASA API fetch
+        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
         document.getElementById('region').innerHTML = "Region: " + allData.region;
         document.getElementById('language').innerHTML = "Language: " + allData.language;
         document.getElementById('currency').innerHTML = "Currency: " + allData.currency;

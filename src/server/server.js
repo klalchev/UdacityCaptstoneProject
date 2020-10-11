@@ -3,8 +3,11 @@ let projectData = {}; // can not be const because it is being reassigned each ti
 
 var path = require('path')
 const express = require('express')
+
+//Middleware
 const bodyParser = require('body-parser');
 const cors = require("cors");
+
 const mockAPIResponse = require('./mockAPI.js'); //we can require it because of 'module.exports = json' in mockAPI.js - that is how we export the mockAPI json object
 //The dotenv package and the associated process.env object can only be done in the express server file
 //you cannot do this on the frontend code. To use the dotenv, you will need to move the API calls to the server
@@ -17,15 +20,19 @@ app.use(express.static('dist'))
 
 console.log(__dirname)
 
-// Initialize the main project folder
+/*
+// Initialize the main project folder- The express app is already serving the dist folder using express.static call above. It will automatically present the dist/index.html file when visiting the / endpoint. Unless you plan to serve something other than dist/index.html, you can remove this GET endpoint statement.
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
+*/
 
+/*
 // designates what port the app server will listen to for incoming requests
 app.listen(4040, function () {
     console.log('Example app listening on port 4040!')
 })
+*/
 
 // Setup Server
 app.post('/addWeatherBit', getWeatherData)
