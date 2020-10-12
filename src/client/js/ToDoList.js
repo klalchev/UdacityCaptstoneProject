@@ -4,7 +4,7 @@ const todoEntryID = "todo-entry";
 const todoTextID = "todo-text";
 const todoEntryDeleteElementID = "delete-todo-entry";
 
-async function newElement() {
+async function newElement() { //async
   // Fetching the input value
   const inputValue = document.getElementById("myInput").value;
   // If input value is empty then alerting and exiting
@@ -59,7 +59,6 @@ const postData = async ( url = '', data = {})=>{
   //appropriately handle the error
   }
 }
-
 
 // Exporting constants also, to use them in index.js
 export {
