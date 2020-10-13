@@ -12,14 +12,15 @@ body{
     color: #f0d43a;
     justify-content: center; */
     grid-template-areas:
-        "heading heading"
-        "holderCity holder"
-        "holderDate holder"
-        "header holder"
-        "save holder"
-        "remove holder"
-        "print holder";
-    grid-template-columns: repeat(2, 1fr);
+        "heading"
+        "holderCity"
+        "holderDate"
+        "holder"
+        "header"
+        "save"
+        "remove"
+        "print";
+    grid-template-columns: 1fr;
     //grid-template-rows: repeat(7, 1fr);
     grid-gap: 10px;
     background: pink;
@@ -50,10 +51,12 @@ h1 {
 
 .city {
     grid-area: holderCity;
+    //justify-self: stretch;
 }
 
-.feel {
+.myDate {
     grid-area: holderDate;
+    //justify-self: stretch;
 }
 
 .header {
@@ -64,6 +67,25 @@ h1 {
     background: rgba(59, 74, 107, .4);
 }
 
+.myDate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.city {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label{
     display:block;
@@ -71,13 +93,21 @@ label{
     font-weight: bold;
 }
 
-input{
+input:not(#myInput){
     display:block;
-    //height: 50px;
+    height: 50px;
     //width: 20px;
     background:#22b2da;
-    color:black;
-    font-size: 20px;
+    color: #f0d43a;
+    font-size: 16px;
+    font-family: 'Oswald', sans-serif;
+    border: none;
+}
+
+#myInput {
+    display:block;
+    background:#22b2da;
+    color: #f0d43a;
     font-family: 'Oswald', sans-serif;
     border: none;
 }
@@ -102,7 +132,8 @@ button{
 }
 
 h1{
-    font-size: 26px;
+    font-size: 35px;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -138,11 +169,14 @@ button:focus {
 
 }
 
-#generate {
-    width:470px;
-}
-
 .title {
     font-size: 16px;
     font-weight: bold;
+    text-align: center;
+    line-height: 25px;
+}
+
+.images {
+    width: 100%;
+    height: auto;
 }

@@ -1,5 +1,4 @@
-const fetch = require('node-fetch') //Since jest run on node environment which does not have fetch API like in a browser, it is producing referenceError. To fix this I used node-fetch module to require fetch in app.js (check the updated answer)
-
+//const fetch = require('node-fetch') //Since jest run on node environment which does not have fetch API like in a browser, it is producing referenceError. To fix this I used node-fetch module to require fetch in app.js (check the updated answer)
 async function performAction(e){
 
     // Create a new date instance dynamically with JS
@@ -178,8 +177,8 @@ const updateUI = async () => {
         document.getElementById('date').innerHTML ='Departing: ' + allData.date;
         document.getElementById('temp').innerHTML ='Typical Temperature for this day is: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
-        document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png></img>`;
-        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
+        document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png alt="forecast icon"></img>`;
+        document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination" class="images"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
         document.getElementById('region').innerHTML = "Region: " + allData.region;
         document.getElementById('language').innerHTML = "Language: " + allData.language;
         document.getElementById('currency').innerHTML = "Currency: " + allData.currency;

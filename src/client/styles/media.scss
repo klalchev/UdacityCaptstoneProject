@@ -1,0 +1,139 @@
+/* Medium & Large Screens */
+@media (min-width: 600px) {
+
+    #app{
+        display: grid;
+        grid-template-areas:
+            "heading heading heading heading"
+            "holderCity holderCity holderCity holderCity"
+            "holderDate holderDate holderDate holderDate"
+            "holder holder holder header"
+            "save remove print header";
+        grid-template-columns: repeat(4, 1fr);
+        //grid-template-rows: (1fr, 1fr, 1fr, 10fr, 0.1fr, 0.1fr, 0.1fr);
+        grid-gap: 10px;
+        background: pink;
+        color: black;
+        font-size: 12px;
+        font-family: 'Oswald', sans-serif;
+    }
+
+    h1 {
+        grid-area: heading;
+    }
+
+    .entry {
+        grid-area: holder;
+    }
+
+    .print {
+        grid-area: print;
+    }
+
+    .saveBtn {
+        grid-area: save;
+    }
+
+    .deleteBtn {
+        grid-area: remove;
+    }
+
+    .city {
+        grid-area: holderCity;
+        justify-self: center;
+    }
+
+    .myDate {
+        grid-area: holderDate;
+        justify-self: center;
+    }
+
+    .header {
+        grid-area: header;
+    }
+
+    .myDate {
+        display: flex;
+        flex-direction: column;
+        //justify-content: center;
+        //align-items: center;
+    }
+
+    .city {
+        display: flex;
+        flex-direction: column;
+        //justify-content: center;
+        //align-items: center;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #entryHolder {
+        display: grid;
+        grid-template-areas:
+        "image temp"
+        "image trip"
+        "image date"
+        "image desc"
+        "image country"
+        "image departureDay"
+        "image region"
+        "image language"
+        "image currency";
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0px 10px;
+        color: black;
+        font-size: 12px;
+        font-family: 'Oswald', sans-serif;
+    }
+
+    #image {
+        grid-area: image;
+    }
+
+    #temp {
+        grid-area: temp;
+    }
+
+    #trip {
+        grid-area: trip;
+    }
+
+    #date {
+        grid-area: date;
+    }
+
+    #desc {
+        grid-area: desc;
+    }
+
+    #country {
+        grid-area: country;
+    }
+
+    #departureDay {
+        grid-area: departureDay;
+    }
+
+    #region {
+        grid-area: region;
+    }
+
+    #language {
+        grid-area: language;
+    }
+
+    #currency {
+        grid-area: currency;
+    }
+
+    input:not(#myInput){
+        width: 500px;
+    }
+
+}

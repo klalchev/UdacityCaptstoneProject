@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Weather Journal</title>
 </head>
 
@@ -16,13 +16,13 @@
     <button class = "print">Print this trip</button> <!--onclick="window.print()"-->
 
     <div class ="holder city">
-      <label for="city">Enter city here</label>
+      <label for="city">Enter City Here</label>
       <input type="text" id="city" placeholder="Your Destination" required>
     </div>
 
-    <div class ="holder feel">
-      <label for="departure">Enter Departure date: MM/DD/YYYY</label>
-      <input type="date" class="myInput" id="departure" name="trip-start" value="2020-10-01" min="2020-01-01" max="2021-12-31"> <!--Consider using input type=date for your date input in the HTML form. You will thank yourself as a developer -- it makes adding dates way easier-->
+    <div class ="holder myDate">
+      <label for="departure">Enter Departure Date</label>
+      <input type="date" class="myInput" id="departure" name="trip-start"  min="2020-01-01" max="2021-12-31" required> <!--Consider using input type=date for your date input in the HTML form. You will thank yourself as a developer -- it makes adding dates way easier; value="2020-10-01"; placeholder is not allowed here-->
       <button id="generate" type = "submit"> Generate </button>
     </div>
 
@@ -31,13 +31,12 @@
 
     <div class ="holder entry">
       <div class ="title">Most Recent Entry</div>
-        <div id = "entryHolder">
+      <div id = "entryHolder">
         <div id= "image"></div>
         <div id = "temp"></div>
         <div id = "trip"></div>
         <div id = "date"></div>
         <div id = "desc"></div>
-        <div id = "icon"></div>
         <div id = "country"></div>
         <div id = "departureDay"></div>
         <div id = "region"></div>
@@ -58,6 +57,7 @@
   </div>
 
   <script>
+    /*
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {
         // Use the window load event to keep the page load performant
@@ -65,6 +65,7 @@
           navigator.serviceWorker.register('/service-worker.js');
         });
     }
+    */
   </script>
 </body>
 </html>

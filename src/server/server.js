@@ -86,6 +86,7 @@ function getCountryData (req, res){
     console.log(projectData)
 }
 
+/*
 app.post('/myList', getList);
 
 function getList (req, res){
@@ -94,6 +95,7 @@ function getList (req, res){
     res.send(projectData)
     console.log(projectData)
 }
+*/
 
 app.get('/all', getData) //In this case get sends the data to the app.js. Every GET request produces a request, which is the data provided by the GET request, and a response, which is the data returned to the GET request
 

@@ -8,6 +8,7 @@ import {printPage} from './js/print'
 import './styles/style.scss'
 import './styles/toDoStyling.scss'
 import './styles/dropdownList.scss'
+import './styles/media.scss'
 
 document.addEventListener('DOMContentLoaded', (event) => {
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (storedData != null) {
         document.getElementById('city').value = storedData.trip; // checkStorage() returns just the object value, without the 'items' key
         document.getElementById('departure').value = storedData.date;
-        document.getElementById('myUL').appendChild(storedData.list);
+        //document.getElementById('myUL').value = storedData.list;
         document.getElementById('country').innerHTML = 'Country: ' + storedData.country;
         document.getElementById('image').innerHTML= `<img src=${storedData.image} alt="trip destination" width=480px and height=309px></img>`;
         document.getElementById('desc').innerHTML =`Forecast: ${storedData.description} <img src= https://www.weatherbit.io/static/img/icons/${storedData.icon}.png></img>`;
