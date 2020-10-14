@@ -28,6 +28,7 @@ app.get('/', function (req, res) {
 */
 
 /*
+Split server.js into 2 files- 1 for endpoints setup and 1 to start the server. Needed for Jest Supertest to test express server endpoints (SUpertest listens for the same port as server)
 // designates what port the app server will listen to for incoming requests
 app.listen(4040, function () {
     console.log('Example app listening on port 4040!')
@@ -57,7 +58,6 @@ function addCity(req, res){ //each route (post or get) callback function has a r
         lng: req.body.lng,
         country: req.body.country,
       // when you add a new element to the server, you have to rerun the server to show the new element
-      // fav: req.body.fav,
         date: req.body.date,
         trip: req.body.trip
     }
@@ -86,7 +86,6 @@ function getCountryData (req, res){
     console.log(projectData)
 }
 
-/*
 app.post('/myList', getList);
 
 function getList (req, res){
@@ -95,7 +94,6 @@ function getList (req, res){
     res.send(projectData)
     console.log(projectData)
 }
-*/
 
 app.get('/all', getData) //In this case get sends the data to the app.js. Every GET request produces a request, which is the data provided by the GET request, and a response, which is the data returned to the GET request
 
@@ -110,4 +108,5 @@ app.get('/test', function (req, res) {
 
 module.exports = app
 //You want to allow each test file to start a server on their own. To do this,
-//you need to export app express server without listening to it. Exported app will be used in server.spec.js
+//you need to export app express server without listening to it.
+//Jest does not cleanly exit, because it listens to the same port as the server. We need to split the server side code into 2 files: one that sets up the endpoints and another one that starts the server. Then test only the file that sets the endpoints.

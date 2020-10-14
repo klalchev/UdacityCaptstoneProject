@@ -1,4 +1,4 @@
-//const fetch = require('node-fetch') //Since jest run on node environment which does not have fetch API like in a browser, it is producing referenceError. To fix this I used node-fetch module to require fetch in app.js (check the updated answer)
+const fetch = require('node-fetch') //Since jest run on node environment which does not have fetch API like in a browser, it is producing referenceError. To fix this I used node-fetch module to require fetch in app.js (check the updated answer)
 async function performAction(e){
 
     // Create a new date instance dynamically with JS
@@ -85,7 +85,7 @@ const getWeatherDemo = async (baseURL)=>{
     try {
 
         const data = await res.json(); // res.json() is the data you fetch
-        console.log(data)
+        //console.log(data)
         return data;
         // 1. We can do sth with our returned data here-- like chain promises
 
@@ -152,12 +152,12 @@ const pixabay = async (pixabayURL)=>{
 
 const restCountries = async (countriesData)=>{
     //1.
-    const res = await fetch(`https://restcountries.eu/rest/v2/name/${countriesData.country}`) //dailyAPI
+    const res = await fetch(`https://restcountries.eu/rest/v2/name/${countriesData.country}`)
 
     try {
 
         const data = await res.json(); // res.json() is the data you fetch
-        console.log(data)
+        //console.log(data) -- The particular message and warnings you are concerned about is coming from scrap console.log statements in the restCountries function. Jest does not like logging stuff after tests are done. So I removed them from the function
         return data;
         // 1. We can do sth with our returned data here-- like chain promises
 
@@ -177,7 +177,7 @@ const updateUI = async () => {
         document.getElementById('date').innerHTML ='Departing: ' + allData.date;
         document.getElementById('temp').innerHTML ='Typical Temperature for this day is: ' + allData.temp;
         document.getElementById('trip').innerHTML ='My trip is to: ' + allData.trip + ', ' +allData.country;
-        document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png alt="forecast icon"></img>`;
+        document.getElementById('desc').innerHTML =`Forecast: ${allData.description} <img src= https://www.weatherbit.io/static/img/icons/${allData.icon}.png alt="forecast icon" class="images"></img>`;
         document.getElementById('image').innerHTML = `<img src=${allData.image} alt="trip destination" class="images"></img>`; // you can also add width=480px and height=309px- see NASA API fetch
         document.getElementById('region').innerHTML = "Region: " + allData.region;
         document.getElementById('language').innerHTML = "Language: " + allData.language;

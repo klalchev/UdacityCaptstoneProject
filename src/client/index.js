@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (storedData != null) {
         document.getElementById('city').value = storedData.trip; // checkStorage() returns just the object value, without the 'items' key
         document.getElementById('departure').value = storedData.date;
-        //document.getElementById('myUL').value = storedData.list;
+        if(storedData.list != undefined) {
+            document.getElementById('myUL').innerHTML = storedData.list;
+        }
         document.getElementById('country').innerHTML = 'Country: ' + storedData.country;
         document.getElementById('image').innerHTML= `<img src=${storedData.image} alt="trip destination" width=480px and height=309px></img>`;
         document.getElementById('desc').innerHTML =`Forecast: ${storedData.description} <img src= https://www.weatherbit.io/static/img/icons/${storedData.icon}.png></img>`;

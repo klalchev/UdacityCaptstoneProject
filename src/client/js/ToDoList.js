@@ -4,7 +4,7 @@ const todoEntryID = "todo-entry";
 const todoTextID = "todo-text";
 const todoEntryDeleteElementID = "delete-todo-entry";
 
-function newElement() { //async
+async function newElement() { //async
   // Fetching the input value
   const inputValue = document.getElementById("myInput").value;
   // If input value is empty then alerting and exiting
@@ -23,15 +23,15 @@ function newElement() { //async
   // The Close button within the todo list
   var spanElementForClose = document.createElement("span");
   spanElementForClose.id = todoEntryDeleteElementID;
-  var closeSymbol = document.createTextNode("\u00D7");
+  var closeSymbol = document.createTextNode(" \u00D7");
   spanElementForClose.appendChild(closeSymbol);
   // Inserting both the text and close button inside the todo list element
   todoEntry.appendChild(spanElementForText);
   todoEntry.appendChild(spanElementForClose);
 // Inserting the todo list element inside the todo list
   document.getElementById("myUL").appendChild(todoEntry);
-  //let list = document.getElementById("todo-text");
-  //await postData ('/myList', {list: list});
+  let list = document.getElementById("myUL").innerHTML; //To capture the li elements, you need to use the innerHTML of the ul. If you only requrest the ul, it returns {ul} without the li elements
+  await postData ('/myList', {list: list});
 }
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -39,7 +39,7 @@ function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
-/*
+
 const postData = async ( url = '', data = {})=>{
 
   const response = await fetch(url, {
@@ -60,7 +60,7 @@ const postData = async ( url = '', data = {})=>{
   //appropriately handle the error
   }
 }
-*/
+
 // Exporting constants also, to use them in index.js
 export {
   newElement,

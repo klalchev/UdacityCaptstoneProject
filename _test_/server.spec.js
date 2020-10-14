@@ -11,6 +11,11 @@ it('Testing /all endpoint', async done => {
     done()
 })
 
-//once you require superset as above, you get the ability to send GET, POST, PUT, PATCH and DELETE requests
- //Supertest gives you a response from the endpoint. You can test both HTTP status and the body of the response,
-//whatever you send through res.json
+/*
+once you require superset as above, you get the ability to send GET, POST, PUT, PATCH and DELETE requests
+Supertest gives you a response from the endpoint. You can test both HTTP status and the body of the response,
+whatever you send through res.json
+However, Jest does not cleanly exit after doing the tests. This can create a problem in a CI/CD environment where you expect the tests to exit when done. Please fix this.
+The simplest way of doing this is to split server side code into 2 files: one that sets up the endpoints and another one that starts the server. Then test only the file that sets the endpoints
+https://zellwk.com/blog/endpoint-testing/
+*/
