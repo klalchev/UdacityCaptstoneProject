@@ -4,7 +4,7 @@ const todoEntryID = "todo-entry";
 const todoTextID = "todo-text";
 const todoEntryDeleteElementID = "delete-todo-entry";
 
-async function newElement() { //async
+async function newElement() {
   // Fetching the input value
   const inputValue = document.getElementById("myInput").value;
   // If input value is empty then alerting and exiting
@@ -38,7 +38,6 @@ toggle between hiding and showing the dropdown content */
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
-
 
 const postData = async ( url = '', data = {})=>{
 

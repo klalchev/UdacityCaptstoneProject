@@ -10,7 +10,6 @@
             "holder holder holder header"
             "save remove print header";
         grid-template-columns: repeat(4, 1fr);
-        //grid-template-rows: (1fr, 1fr, 1fr, 10fr, 0.1fr, 0.1fr, 0.1fr);
         grid-gap: 10px;
         background: pink;
         color: black;
@@ -55,15 +54,11 @@
     .myDate {
         display: flex;
         flex-direction: column;
-        //justify-content: center;
-        //align-items: center;
     }
 
     .city {
         display: flex;
         flex-direction: column;
-        //justify-content: center;
-        //align-items: center;
     }
 
     .header {
